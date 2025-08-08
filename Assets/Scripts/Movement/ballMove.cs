@@ -5,17 +5,24 @@ using UnityEngine.InputSystem;
 public class ballMove : MonoBehaviour
 {
     [Header("Essentials")]
-    GameManager gameManager;
+   private GameManager gameManager;
+    private InputActions inputActions;
 
 
     [Header("Lane Settings")]
-    public float laneDistance = 3f;
-    public float laneChangeSpeed = 10f;
+    [SerializeField] float laneDistance = 3f;
+    [SerializeField] float laneChangeSpeed = 10f;
+    private int currentLane = 1;
+   
 
     [Header("Movement")]
     public float baseSpeed = 5f;
     public float boostSpeed = 10f;
+    private float currentSpeed;
+    private Vector3 targetPosition;
+    private Rigidbody rb;
 
+    [Header("Swipe Settings")]
     private Vector2 startTouchPos;
     private Vector2 endTouchPos;
     private float swipeThreshold = 50f; // pixels
@@ -23,24 +30,21 @@ public class ballMove : MonoBehaviour
 
 
     [Header("Jump Settings")]
-    public float minJumpForce = 6f;
-    public float maxJumpForce = 12f;
-    public float jumpChargeRate = 5f;
-
-    private float currentSpeed;
-    private int currentLane = 1;
-    private Vector3 targetPosition;
-    private Rigidbody rb;
-
-    private InputActions inputActions;
+    [SerializeField] float minJumpForce = 6f;
+    [SerializeField] float maxJumpForce = 12f;
+    [SerializeField] float jumpChargeRate = 5f;
     private bool isHolding = false;
     private bool isChargingJump = false;
     private bool isGrounded = true;
-
     private float touchStartTime;
     private float tapThreshold = 0.01f;
-
     private float holdJumpForce;
+
+
+
+
+
+
 
     void Awake()
     {
@@ -71,7 +75,7 @@ public class ballMove : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Forward movement with gradual speed change
         float targetSpeed = isHolding ? boostSpeed : baseSpeed;
@@ -83,7 +87,7 @@ public class ballMove : MonoBehaviour
 
         moveDirection.y = 0;
         moveDirection.z = 0;
-        rb.MovePosition(rb.position + moveDirection * laneChangeSpeed * Time.deltaTime);
+        rb.MovePosition(rb.position + moveDirection * laneChangeSpeed * Time.deltaTime);         //  Move smoothly towards the target lane (only in X)
 
         // Ground check
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
@@ -98,18 +102,7 @@ public class ballMove : MonoBehaviour
         Debug.Log("Current Speed: " + currentSpeed);
     }
 
-    void FixedUpdate()
-    {
-        // Move smoothly towards the target lane (only in X)
-        Vector3 newPosition = transform.position;
-        float step = laneChangeSpeed * Time.fixedDeltaTime;
-
-        // Only move x-axis toward target x
-        newPosition.x = Mathf.MoveTowards(transform.position.x, targetPosition.x, step);
-
-        // Apply the new position
-        rb.MovePosition(newPosition);
-    }
+   
 
     void OnTouchStart()
     {
