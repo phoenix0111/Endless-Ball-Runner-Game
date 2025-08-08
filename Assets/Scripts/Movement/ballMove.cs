@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class ballMove : MonoBehaviour
 {
+    [Header("Essentials")]
+    GameManager gameManager;
+
+
     [Header("Lane Settings")]
     public float laneDistance = 3f;
     public float laneChangeSpeed = 10f;
@@ -42,6 +46,8 @@ public class ballMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         inputActions = new InputActions();
+        gameManager = FindAnyObjectByType<GameManager>();
+
     }
 
     void OnEnable()
@@ -62,6 +68,7 @@ public class ballMove : MonoBehaviour
     {
         currentSpeed = baseSpeed;
         UpdateTargetPosition();
+        
     }
 
     void Update()
@@ -203,5 +210,16 @@ public class ballMove : MonoBehaviour
     void UpdateTargetPosition()
     {
         targetPosition = new Vector3((currentLane - 1) * laneDistance, transform.position.y, transform.position.z);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Coin"))
+        {
+            gameManager.CoinUpdate();
+            Destroy(other.gameObject);
+            
+        }
+       
     }
 }

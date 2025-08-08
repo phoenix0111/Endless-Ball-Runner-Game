@@ -6,29 +6,31 @@ using UnityEngine.EventSystems;
 
 
 public class UIManager : MonoBehaviour
-    {
+{
     [Header("Essentials")]
-    [SerializeField] GameManager gameManager;
-    [SerializeField] InputActions PlayerInputManager;
+     [SerializeField] GameManager gameManager;
+     [SerializeField] InputActions PlayerInputManager;
 
 
     [Header("Score")]
-        public TextMeshProUGUI scoreText;
-        public float UIscore = 0;
-       
-        [SerializeField] TextMeshProUGUI scoreGameOver;
+     public TextMeshProUGUI scoreText;
+     public float UIscore = 0;
+     [SerializeField] TextMeshProUGUI scoreGameOver;
 
-        [Header("Pause Game")]
-        [SerializeField] GameObject Pausemenu;
-        [SerializeField] GameObject GameOverScreen;
+    [Header("Pause Game")]
+     [SerializeField] GameObject Pausemenu;
+     [SerializeField] GameObject GameOverScreen;
 
-        void Start()
+    [Header("Coins")]
+    public TextMeshProUGUI coinsText;
+
+    void Start()
         {
             if(Pausemenu != null) Pausemenu.SetActive(false);
             if (GameOverScreen != null) GameOverScreen.SetActive(false);
 
             Time.timeScale = 1; // Ensure the game starts at normal speed
-    }
+        }
 
 
         void Update()
@@ -58,7 +60,7 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1; 
             Pausemenu.SetActive(false);
        
-    }
+        }
 
         public void quitGame()
         {
@@ -77,5 +79,6 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1; 
             SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         }
-    }
+    
+}
 

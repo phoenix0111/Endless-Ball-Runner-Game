@@ -3,14 +3,21 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [Header("Movement")]
-    public SwipeController swipeController;
-    public ballMove player;
+     [SerializeField] SwipeController swipeController;
+     [SerializeField] ballMove player;
+
 
     [Header("UI Manager")]
     [SerializeField] UIManager uiManager;
     public float score = 0f;
-    float Fscore = 0f;
+    private float Fscore = 0f;
     [SerializeField] float scoreIncrementRate = 10f; // Points per second
+    public int coins = 0; 
+
+    [Header("Difficulty Settings")]
+    [SerializeField] int nextScoreThreshold = 100; // Initial threshold for difficulty increase    
+    [SerializeField] int SpeedIncreaseRate = 1; // How much to increase speed each time
+
 
     private void Start()
     {
@@ -25,10 +32,13 @@ public class GameManager : MonoBehaviour
         ScoreLogic();
 
 
-
+        if (score >= nextScoreThreshold)
+        {
+            increaseDifficulty();
+            nextScoreThreshold += 100; // Set next threshold (200, 300, etc.)
+        }
 
     }
-
 
 
 
@@ -42,5 +52,17 @@ public class GameManager : MonoBehaviour
 
 
         uiManager.scoreText.text = "Score: " + score.ToString("F0"); // Update the score text in UI
+    }
+
+    void increaseDifficulty()
+    {
+        player.baseSpeed += SpeedIncreaseRate; // Increase player speed
+        player.boostSpeed += SpeedIncreaseRate; // Increase boost speed
+    }
+
+    public void CoinUpdate()
+    {
+          coins++; // Increment coins by 1
+        uiManager.coinsText.text = "Coins: " + coins.ToString(); // Update the coins text in UI
     }
 }
