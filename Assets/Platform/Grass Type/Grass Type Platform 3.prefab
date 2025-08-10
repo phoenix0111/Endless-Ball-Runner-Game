@@ -137,9 +137,10 @@ MonoBehaviour:
   length: 80.8
   shouldGenerateObstacles: 1
   generateObstacleProbability: 1
-  firstElementLocalPosition: {x: -2.27, y: 0, z: 75}
+  firstElementLocalPosition: {x: -2.27, y: 0, z: 77.5}
   rows: 21
   columns: 3
+  activeRows: 000101010101010100000101010101010101010000
   offsetX: 2.5
   offsetZ: -3.5
   chunkSpaceCheckRadius: 0.3

@@ -19,6 +19,8 @@ public class Chunk : MonoBehaviour
     
     [Min(1)]
     [SerializeField] private int columns = 2;
+
+    [SerializeField] private bool[] activeRows;
     
     [SerializeField] private float offsetX = 1.0f;
     [SerializeField] private float offsetZ = 1.0f;
@@ -60,7 +62,7 @@ public class Chunk : MonoBehaviour
             }
         }
 
-        return true;
+        return activeRows[row] == true;
     }
     public IEnumerator GenerateObstacles()
     {
@@ -264,6 +266,14 @@ public class Chunk : MonoBehaviour
     private void OnEnable()
     {
         CalculateAllObstacleSpawnPos();
+    }
+
+    private void OnValidate()
+    {
+        if(activeRows == null || activeRows.Length != rows)
+        {
+            activeRows = new bool[rows];
+        }
     }
 
     private void OnDisable()
