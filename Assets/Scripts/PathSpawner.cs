@@ -1,16 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Tilemaps;
 
 public class PathSpawner : MonoBehaviour
 {
-    public Transform player; // Player reference
-    public Chunk[] pathPrefabs; // Different types of paths (some with gaps)
-    public float distanceBetweenChunks = 3.0f; // Length of each path tile
-    public int startTileCount = 7; // Number of tiles at start
-    public int deleteThresholdIndex = 3;
-    public int spawnTriggerIndex = 5;
+    [SerializeField] private Transform player; // Player reference
+    [SerializeField] private Chunk[] pathPrefabs; // Different types of paths (some with gaps)
+    [SerializeField] private float distanceBetweenChunks = 3.0f; // Length of each path tile
+    [Min(1)]
+    [SerializeField] private int startTilesWithoutObstaclesCount = 2;
+    [Min(1)]
+    [SerializeField] private int startTilesWithObstaclesCount = 7; // Number of tiles with obstacles at start
+    [Min(1)]
+    [SerializeField] private int tilesCountAfterResettingOrigin = 5;
     [Min(0.1f)]
-    public float pathDistance = 50.0f;
+    [SerializeField] private float pathDistance = 50.0f;
+    
 
     private float spawnZ = 0f;
    
@@ -18,36 +24,52 @@ public class PathSpawner : MonoBehaviour
 
     void Start()
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
         // Spawn initial path tiles
-        for (int i = 0; i < startTileCount; i++)
+        for (int i = 0; i < startTilesWithoutObstaclesCount; i++)
         {
             SpawnTile(false);
         }
+            for (int i = 0; i < startTilesWithObstaclesCount; i++)
+        {
+            SpawnTile(true);
+        }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
-            float playerZ = player.position.z;
+       float playerZ = player.position.z;
 
-            // Check if we need to spawn a new tile
-            float distanceZ = playerZ + (startTileCount - spawnTriggerIndex) * pathDistance;
-            Debug.Log("DistanceZ: " + distanceZ + ", SpawnZ: " + spawnZ);
-            if (distanceZ > spawnZ)
+        // Check if we need to spawn a new tile
+        //If yes, then spawn it.
+        //And then reset origin of all the things.
+        //Then delete the tiles behind the player.
+
+
+        Debug.Log("Path Distance: " + pathDistance + ", PlayerZ: " + playerZ);
+        if (playerZ > pathDistance)
+        {
+            ResetOriginOfTiles(playerZ);
+            player.transform.position -= Vector3.forward * playerZ;
+            DeleteTiles();
+            for(int i = 0; i < tilesCountAfterResettingOrigin; i++)
             {
                 SpawnTile(true);
             }
+        }
 
-            // Delete tiles that are behind the player
-            // You can adjust this 'safe zone' value
-            float safeZone = pathDistance * 2;
+    }
 
-            if (activeTiles.Count > 0 && playerZ - activeTiles[0].transform.position.z > safeZone)
-            {
-                DeleteTile();
-            }
-        
+    
 
+    private void ResetOriginOfTiles(float distance)
+    {
+        foreach (Chunk chunk in activeTiles)
+        {
+            chunk.MoveBack(distance);
+        }
+
+        spawnZ -= distance;
     }
 
     void SpawnTile(bool generateObstacles)
@@ -61,9 +83,33 @@ public class PathSpawner : MonoBehaviour
         spawnZ += newTile.Length + distanceBetweenChunks;
     }
 
-    void DeleteTile()
+    void DeleteTiles()
     {
-        Destroy(activeTiles[0]);
-        activeTiles.RemoveAt(0);
+        int lastTileIndexBehindThePlayer = -1;
+        for(int i = 0; i < activeTiles.Count; i++)
+        {
+            Chunk chunk = activeTiles[i];
+            if(chunk.transform.position.z < player.transform.position.z)
+            {
+                lastTileIndexBehindThePlayer = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (lastTileIndexBehindThePlayer > 0)
+        {
+            lastTileIndexBehindThePlayer--;
+        }
+
+        for (int i = 0; i < lastTileIndexBehindThePlayer; i++)
+        {
+            Destroy(activeTiles[0]);
+            activeTiles.RemoveAt(0);
+        }
+
+        
     }
 }
