@@ -22,7 +22,7 @@ public class ObstaclesManager : MonoBehaviour
 
     public Obstacle Spawn(Vector3 position, Quaternion rotation, ObstacleType type, LaneHeightType laneHeightType)
     {
-        Debug.Log("Getting obstacle");
+        //Debug.Log("Getting obstacle");
         IEnumerable<ObstacleKey> enumerable = obstacleKeys.Where(value => value.Type == type && 
                                                 value.Height == laneHeightType);
         
@@ -53,7 +53,7 @@ public class ObstaclesManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Unspawning obstacle");
+        //Debug.Log("Unspawning obstacle");
         ObstacleType type = obstacle.ObstacleType;
         LaneHeightType laneHeightType = obstacle.LaneHeightType;
 

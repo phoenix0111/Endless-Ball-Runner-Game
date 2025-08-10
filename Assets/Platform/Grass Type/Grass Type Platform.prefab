@@ -55,7 +55,7 @@ MonoBehaviour:
   offsetX: 2.5
   offsetZ: -3.5
   chunkSpaceCheckRadius: 0.5
-  spawnCount: 2
+  spawnCount: 1
 --- !u!65 &3550429179125909962
 BoxCollider:
   m_ObjectHideFlags: 0

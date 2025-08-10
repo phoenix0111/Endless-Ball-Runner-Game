@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2723080178786475503}
   - component: {fileID: 7396605569903279277}
   - component: {fileID: 5073399302908096014}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 9179466537628532763}
   - component: {fileID: 1849487328417464240}
   - component: {fileID: 5004217956968669914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Block Obstacle(Tall)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 416930373477603022}
   - component: {fileID: 2344363429473924885}
   - component: {fileID: 8281879640658337618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 4832366302678071486}
   - component: {fileID: 8500456671350471042}
   - component: {fileID: 7439615508830806770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
