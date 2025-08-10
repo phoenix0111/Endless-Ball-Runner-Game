@@ -1111,9 +1111,10 @@ MonoBehaviour:
   - {fileID: 8041199271473310930, guid: 1eb5385c4a32de940923f0786ad46c2d, type: 3}
   - {fileID: 1967500460580018601, guid: b1d2e9b44e652684ea28bbb60b96c210, type: 3}
   distanceBetweenChunks: 3.5
-  startTileCount: 3
+  startTileCount: 5
   deleteThresholdIndex: 2
-  spawnTriggerIndex: 5
+  spawnTriggerIndex: 3
+  pathDistance: 20
 --- !u!4 &509680485
 Transform:
   m_ObjectHideFlags: 0
@@ -1433,15 +1434,15 @@ MonoBehaviour:
   - obstacleHeight: 0
     obstacleType: 0
     prefab: {fileID: 3578605623297174098, guid: 925c585d8da116c498f7db56c3a32b16, type: 3}
-    maxCount: 20
+    maxCount: 100
   - obstacleHeight: 2
     obstacleType: 0
     prefab: {fileID: 1849487328417464240, guid: 07c988de62794c34b8c6a48e120bceaf, type: 3}
-    maxCount: 20
+    maxCount: 100
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  obstacleCheckRadius: 0.3
+  obstacleCheckRadius: 4
 --- !u!4 &587011372
 Transform:
   m_ObjectHideFlags: 0
