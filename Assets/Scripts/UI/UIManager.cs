@@ -28,7 +28,10 @@ public class UIManager : MonoBehaviour
             if (GameOverScreen != null) GameOverScreen.SetActive(false);
 
             Time.timeScale = 1; // Ensure the game starts at normal speed
-    }
+
+            //Registering UI manager using Service Locator.
+            ServiceLocator.ForSceneOf(this).Register<UIManager>(this);
+        }
 
 
         void Update()
@@ -39,6 +42,11 @@ public class UIManager : MonoBehaviour
               scoreGameOver.text = "Your Score\n" +UIscore.ToString(); // Update the score text in Game Over screen
             }
 
+        }
+
+        public void ShowGameOverScreen()
+        {
+            GameOverScreen.SetActive(true);
         }
 
         public void PlayGame()
