@@ -19,6 +19,8 @@ public class Chunk : MonoBehaviour
     
     [Min(1)]
     [SerializeField] private int columns = 2;
+
+    [SerializeField] private bool[] activeRows;
     
     [SerializeField] private float offsetX = 1.0f;
     [SerializeField] private float offsetZ = 1.0f;
@@ -37,12 +39,12 @@ public class Chunk : MonoBehaviour
     public void MoveBack(float distance)
     {
         //Move chunk backward first.
-        transform.position -= transform.forward * distance;
+        transform.position -= Vector3.forward * distance;
 
         //Then move all the obstacles back.
         foreach(var obstacle in currentObstacles)
         {
-            obstacle.transform.position -= obstacle.transform.forward * distance;
+            obstacle.transform.position -= Vector3.forward * distance;
         }
     }
 
@@ -60,7 +62,7 @@ public class Chunk : MonoBehaviour
             }
         }
 
-        return true;
+        return activeRows[row] == true;
     }
     public IEnumerator GenerateObstacles()
     {
@@ -68,14 +70,6 @@ public class Chunk : MonoBehaviour
         {
             yield break;
         }
-
-        //Check if a probability of spawning an obstacle is greater than specified probability.
-        //float probability = Random.value;
-
-        //if(probability < (1.0f - generateObstacleProbability))
-        //{
-        //    yield break;
-        //}
 
         int tries = 10;
         while (tries > 0 && !ServiceLocator.ForSceneOf(this).TryGetService<ObstaclesManager>(out obstaclesManager))
@@ -107,16 +101,11 @@ public class Chunk : MonoBehaviour
         //Select the random obstacle type.
         ObstacleType obstacleType = ObstacleType.Block; //Utility.GetRandomEnum<ObstacleType>(1, 4);
 
-        Debug.Log("Random lane: " + randomLaneType.ToString() + ", Obstacle Type: " + obstacleType.ToString());
-        //Select random row and column.
-        int randomRow = Random.Range(1, obstacleLocalSpawnPos.Count);
-        int randomColumn = Random.Range(0, 3);
-
-        LaneHeightType randomLaneHeightType = Utility.GetRandomEnum<LaneHeightType>(1, 3);
-
-        Vector3 checkPosition = transform.position + obstacleLocalSpawnPos[randomRow][randomColumn];
-
+        //Debug.Log("Random lane: " + randomLaneType.ToString() + ", Obstacle Type: " + obstacleType.ToString());
         
+        //Select random row and column.
+        int randomRow = Random.Range(1, obstacleLocalSpawnPos.Count - 1);
+        int randomColumn = Random.Range(0, 3);
 
         //Check if chunk ground exists on this row or not. If not, skip it.
         //Also, check for obstacle here.
@@ -125,6 +114,7 @@ public class Chunk : MonoBehaviour
             return;
         }
 
+        
         //Now, spawn the obstacles based on random lane type.
         switch (randomLaneType)
         {
@@ -132,7 +122,7 @@ public class Chunk : MonoBehaviour
                 var obstacle = obstaclesManager.Spawn(transform.position + obstacleLocalSpawnPos[randomRow][randomColumn],
                                        Quaternion.identity,
                                        obstacleType,
-                                       randomLaneHeightType);
+                                       Utility.GetRandomEnum<LaneHeightType>(1, 3));
 
                 currentObstacles.Add(obstacle);
                 break;
@@ -140,24 +130,23 @@ public class Chunk : MonoBehaviour
                 GenerateObstaclesInDoubleLane(randomRow,
                                               randomColumn,
                                               obstacleType,
-                                              randomLaneHeightType,
                                               obstaclesManager);
                 break;
             case LaneType.Triple:
                 var obstacle1 = obstaclesManager.Spawn(transform.position + obstacleLocalSpawnPos[randomRow][0],
                                        Quaternion.identity,
                                        obstacleType,
-                                       randomLaneHeightType);
+                                       Utility.GetRandomEnum<LaneHeightType>(1, 3));
 
                 var obstacle2 = obstaclesManager.Spawn(transform.position + obstacleLocalSpawnPos[randomRow][1],
                                        Quaternion.identity,
                                        obstacleType,
-                                       randomLaneHeightType);
+                                       Utility.GetRandomEnum<LaneHeightType>(1, 3));
 
                 var obstacle3 = obstaclesManager.Spawn(transform.position + obstacleLocalSpawnPos[randomRow][2],
                                        Quaternion.identity,
                                        obstacleType,
-                                       randomLaneHeightType);
+                                       Utility.GetRandomEnum<LaneHeightType>(1, 3));
 
                 currentObstacles.Add(obstacle1);
                 currentObstacles.Add(obstacle2);
@@ -168,7 +157,6 @@ public class Chunk : MonoBehaviour
     private void GenerateObstaclesInDoubleLane(int row, 
                                                int unselectedColumn, 
                                                ObstacleType type, 
-                                               LaneHeightType laneHeightType, 
                                                ObstaclesManager obstaclesManager)
     {
         //Select the first column based on specified column.
@@ -220,12 +208,12 @@ public class Chunk : MonoBehaviour
         var obstacle1 = obstaclesManager.Spawn(transform.position + obstacleLocalSpawnPos[row][column1],
                                Quaternion.identity,
                                type,
-                               laneHeightType);
+                               Utility.GetRandomEnum<LaneHeightType>(1, 3));
 
         var obstacle2 = obstaclesManager.Spawn(transform.position + obstacleLocalSpawnPos[row][column2],
                                Quaternion.identity,
                                type,
-                               laneHeightType);
+                               Utility.GetRandomEnum<LaneHeightType>(1, 3));
         
         currentObstacles.Add(obstacle1);
         currentObstacles.Add(obstacle2);
@@ -278,6 +266,14 @@ public class Chunk : MonoBehaviour
     private void OnEnable()
     {
         CalculateAllObstacleSpawnPos();
+    }
+
+    private void OnValidate()
+    {
+        if(activeRows == null || activeRows.Length != rows)
+        {
+            activeRows = new bool[rows];
+        }
     }
 
     private void OnDisable()

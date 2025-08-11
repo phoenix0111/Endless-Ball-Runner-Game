@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,50 +20,45 @@ public class GameManager : MonoBehaviour
     [SerializeField] int SpeedIncreaseRate = 1; // How much to increase speed each time
 
 
+    public UnityEvent OnGameOver;
+
+    private bool isGameOver = false;
+
+    public bool IsGameOver { get => isGameOver; }
+
     private void Start()
     {
         swipeController = GetComponent<SwipeController>();
 
+        ServiceLocator.ForSceneOf(this).Register<GameManager>(this);
         swipeController.OnSwipeLeft += player.MoveLeft;
         swipeController.OnSwipeRight += player.MoveRight;
+        OnGameOver.AddListener(SetGameOverStateToTrue);
+        OnGameOver.AddListener(uiManager.ShowGameOverScreen);
     }
 
     void Update()
     {
         ScoreLogic();
-
-
-        if (score >= nextScoreThreshold)
-        {
-            increaseDifficulty();
-            nextScoreThreshold += 100; // Set next threshold (200, 300, etc.)
-        }
-
     }
-
-
 
     void ScoreLogic()
     {
+        if (isGameOver)
+        {
+            return;
+        }
+
         float deltaTime = Time.deltaTime;
 
         Fscore += deltaTime * scoreIncrementRate; // Increment score by  points per second
         score = Mathf.FloorToInt(Fscore);
 
-
-
         uiManager.scoreText.text = "Score: " + score.ToString("F0"); // Update the score text in UI
     }
 
-    void increaseDifficulty()
+    void SetGameOverStateToTrue()
     {
-        player.baseSpeed += SpeedIncreaseRate; // Increase player speed
-        player.boostSpeed += SpeedIncreaseRate; // Increase boost speed
-    }
-
-    public void CoinUpdate()
-    {
-          coins++; // Increment coins by 1
-        uiManager.coinsText.text = "Coins: " + coins.ToString(); // Update the coins text in UI
+        isGameOver = true;
     }
 }
