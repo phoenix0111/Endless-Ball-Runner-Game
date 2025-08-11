@@ -140,7 +140,7 @@ MonoBehaviour:
   firstElementLocalPosition: {x: -2.27, y: 0, z: 77.3}
   rows: 23
   columns: 3
-  activeRows: 0101010101010101010101010101010100000001010100
+  activeRows: 0101010101010101010101010101010100000001010000
   offsetX: 2.5
   offsetZ: -3.5
   chunkSpaceCheckRadius: 0.3

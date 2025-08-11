@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleType: 0
   laneHeightType: 2
+  height: 4.705991
 --- !u!65 &5004217956968669914
 BoxCollider:
   m_ObjectHideFlags: 0
