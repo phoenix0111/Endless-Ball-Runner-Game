@@ -1110,8 +1110,8 @@ MonoBehaviour:
   - {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
   - {fileID: 8041199271473310930, guid: 1eb5385c4a32de940923f0786ad46c2d, type: 3}
   - {fileID: 1967500460580018601, guid: b1d2e9b44e652684ea28bbb60b96c210, type: 3}
-  distanceBetweenChunks: 3.5
-  startTilesWithoutObstaclesCount: 2
+  distanceBetweenChunks: 6
+  startTilesWithoutObstaclesCount: 1
   startTilesWithObstaclesCount: 2
   tilesCountAfterResettingOrigin: 5
   pathDistance: 100
@@ -1898,6 +1898,9 @@ MonoBehaviour:
   uiManager: {fileID: 1992289791}
   score: 0
   scoreIncrementRate: 10
+  coins: 0
+  nextScoreThreshold: 100
+  SpeedIncreaseRate: 1
   OnGameOver:
     m_PersistentCalls:
       m_Calls: []
@@ -3852,3 +3855,4 @@ SceneRoots:
   - {fileID: 509680485}
   - {fileID: 587011372}
   - {fileID: 876522871}
+  - {fileID: 1426577702}

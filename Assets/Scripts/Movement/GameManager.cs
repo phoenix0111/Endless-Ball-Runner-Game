@@ -61,4 +61,10 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
     }
+
+    public void CoinUpdate()
+    {
+        coins++; // Increment coins by 1
+        uiManager.coinsText.text = "Coins: " + coins.ToString(); // Update the coins text in UI
+    }
 }
