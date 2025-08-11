@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverScreen()
         {
-            scoreText.gameObject.SetActive(false);
+           // scoreText.gameObject.SetActive(false);
             Pausemenu.SetActive(false);
             GameOverScreen.SetActive(true);
         }

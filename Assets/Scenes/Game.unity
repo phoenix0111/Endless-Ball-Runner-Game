@@ -1766,7 +1766,7 @@ MonoBehaviour:
   nextScoreThreshold: 100
   SpeedIncreaseRate: 1
   Restartpos: {x: 0, y: 0, z: 0}
-  playerPrefab: {fileID: 873820792480744276, guid: 0be37c5f5d206d74ab1a5d6c7be3b788, type: 3}
+  BallPlayer: {fileID: 1241233043}
   OnGameOver:
     m_PersistentCalls:
       m_Calls: []
@@ -2328,6 +2328,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232596751}
   m_CullTransparentMesh: 1
+--- !u!1 &1241233043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 873820792480744276, guid: 0be37c5f5d206d74ab1a5d6c7be3b788, type: 3}
+  m_PrefabInstance: {fileID: 7968287873307981848}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1304061211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3647,7 +3652,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8906556966357397454, guid: 0be37c5f5d206d74ab1a5d6c7be3b788, type: 3}
   m_PrefabInstance: {fileID: 7968287873307981848}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1241233043}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0944356866bd6294098b15a2ed86b772, type: 3}

@@ -14,7 +14,7 @@ public class GameOverDecider : MonoBehaviour
             gameManager.OnGameOver?.Invoke();
             gameObject.SetActive(false);
             hasFallenToDeath = true;
-            Destroy(gameObject);
+            
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -26,7 +26,7 @@ public class GameOverDecider : MonoBehaviour
             ServiceLocator.ForSceneOf(this).TryGetService<GameManager>(out GameManager gameManager);
             gameManager.OnGameOver?.Invoke();
             gameObject.SetActive(false);
-            Destroy(gameObject); // Optionally destroy the object that triggered the game over
+           
         }
     }
 
@@ -38,7 +38,7 @@ public class GameOverDecider : MonoBehaviour
         {
             ServiceLocator.ForSceneOf(this).TryGetService<GameManager>(out GameManager gameManager);
             gameManager.OnGameOver?.Invoke();
-            Destroy(gameObject);
+            
         }
     }
 }
