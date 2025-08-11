@@ -1111,10 +1111,10 @@ MonoBehaviour:
   - {fileID: 8041199271473310930, guid: 1eb5385c4a32de940923f0786ad46c2d, type: 3}
   - {fileID: 1967500460580018601, guid: b1d2e9b44e652684ea28bbb60b96c210, type: 3}
   distanceBetweenChunks: 3.5
-  startTileCount: 5
-  deleteThresholdIndex: 2
-  spawnTriggerIndex: 3
-  pathDistance: 20
+  startTilesWithoutObstaclesCount: 2
+  startTilesWithObstaclesCount: 2
+  tilesCountAfterResettingOrigin: 5
+  pathDistance: 100
 --- !u!4 &509680485
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,6 +1435,10 @@ MonoBehaviour:
     obstacleType: 0
     prefab: {fileID: 3578605623297174098, guid: 925c585d8da116c498f7db56c3a32b16, type: 3}
     maxCount: 100
+  - obstacleHeight: 1
+    obstacleType: 0
+    prefab: {fileID: 3578605623297174098, guid: 23fbc5e1c7a683c42a2e34155aa45663, type: 3}
+    maxCount: 100
   - obstacleHeight: 2
     obstacleType: 0
     prefab: {fileID: 1849487328417464240, guid: 07c988de62794c34b8c6a48e120bceaf, type: 3}
@@ -1442,7 +1446,7 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  obstacleCheckRadius: 4
+  obstacleCheckRadius: 7
 --- !u!4 &587011372
 Transform:
   m_ObjectHideFlags: 0
@@ -1714,7 +1718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &928071817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1789,7 +1793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &931722082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1894,6 +1898,9 @@ MonoBehaviour:
   uiManager: {fileID: 1992289791}
   score: 0
   scoreIncrementRate: 10
+  OnGameOver:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &938198531
 Transform:
   m_ObjectHideFlags: 0
@@ -3214,6 +3221,7 @@ GameObject:
   - component: {fileID: 2028557066}
   - component: {fileID: 2028557065}
   - component: {fileID: 2028557070}
+  - component: {fileID: 2028557071}
   m_Layer: 0
   m_Name: Ball Player
   m_TagString: Untagged
@@ -3246,7 +3254,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!135 &2028557066
 SphereCollider:
@@ -3357,6 +3365,22 @@ MonoBehaviour:
   minJumpForce: 6
   maxJumpForce: 12
   jumpChargeRate: 10
+--- !u!114 &2028557071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028557064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55c77eab64f6c54a8e8cf4324d5fa7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  fallHeight: 60
 --- !u!1 &2044197700
 GameObject:
   m_ObjectHideFlags: 0
