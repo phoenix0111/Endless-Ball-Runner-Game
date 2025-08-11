@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
        BallPlayer.transform.position = Restartpos; // Reset player position
         BallPlayer.SetActive(true);
         uiManager.Allpaneldisable(); // Disable all panels
-      
+        uiManager.scoreText.gameObject.SetActive(false);
         isGameOver = false;
         
 
