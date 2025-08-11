@@ -3360,8 +3360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laneDistance: 2
   laneChangeSpeed: 7
-  baseSpeed: 5
-  boostSpeed: 10
+  baseSpeed: 7
+  boostSpeed: 14
   minJumpForce: 6
   maxJumpForce: 12
   jumpChargeRate: 10
