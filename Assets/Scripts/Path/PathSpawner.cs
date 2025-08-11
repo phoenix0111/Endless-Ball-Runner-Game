@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class PathSpawner : MonoBehaviour
 {
-    [SerializeField] private Transform player; // Player reference
+   public Transform player; // Player reference
     [SerializeField] private Chunk[] pathPrefabs; // Different types of paths (some with gaps)
     [SerializeField] private float distanceBetweenChunks = 3.0f; // Length of each path tile
     [Min(1)]
@@ -24,6 +24,7 @@ public class PathSpawner : MonoBehaviour
 
     void Start()
     {
+        ServiceLocator.ForSceneOf(this).Register<PathSpawner>(this);
         Random.InitState((int)System.DateTime.Now.Ticks);
         // Spawn initial path tiles
         for (int i = 0; i < startTilesWithoutObstaclesCount; i++)
@@ -38,8 +39,9 @@ public class PathSpawner : MonoBehaviour
 
     void FixedUpdate()
     {
-       float playerZ = player.position.z;
-
+        float playerZ = 0;
+        if (player != null) playerZ = player.position.z;
+      
         // Check if we need to spawn a new tile
         //If yes, then spawn it.
         //And then reset origin of all the things.

@@ -213,6 +213,13 @@ public class ballMove : MonoBehaviour
             Destroy(other.gameObject);
             
         }
-       
+
+        if(other.gameObject.CompareTag("checkpoint"))
+        {
+            gameManager.Restartpos = other.transform.position;
+        }
+
     }
+
+
 }

@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] int nextScoreThreshold = 100; // Initial threshold for difficulty increase    
     [SerializeField] int SpeedIncreaseRate = 1; // How much to increase speed each time
 
+    [Header("Game Restart")]
+    public Vector3 Restartpos;
+    [SerializeField] GameObject playerPrefab;
 
     public UnityEvent OnGameOver;
 
@@ -31,9 +34,13 @@ public class GameManager : MonoBehaviour
         swipeController = GetComponent<SwipeController>();
 
         ServiceLocator.ForSceneOf(this).Register<GameManager>(this);
-        swipeController.OnSwipeLeft += player.MoveLeft;
-        swipeController.OnSwipeRight += player.MoveRight;
-        OnGameOver.AddListener(SetGameOverStateToTrue);
+        if (player != null)
+        {
+            swipeController.OnSwipeLeft += player.MoveLeft;
+            swipeController.OnSwipeRight += player.MoveRight;
+        }
+       
+       OnGameOver.AddListener(SetGameOverStateToTrue);
         OnGameOver.AddListener(uiManager.ShowGameOverScreen);
     }
 
@@ -66,5 +73,20 @@ public class GameManager : MonoBehaviour
     {
         coins++; // Increment coins by 1
         uiManager.coinsText.text = "Coins: " + coins.ToString(); // Update the coins text in UI
+    }
+
+    public void RestartGame()
+    {
+       GameObject ballplayer = Instantiate(playerPrefab, Restartpos, Quaternion.identity); // Instantiate the player at the restart position
+        ballplayer.SetActive(true);
+        uiManager.Allpaneldisable(); // Disable all panels
+        player = ballplayer.GetComponent<ballMove>(); // Get the player component from the instantiated player 
+        swipeController = GetComponent<SwipeController>();
+        swipeController.OnSwipeLeft += player.MoveLeft;
+        swipeController.OnSwipeRight += player.MoveRight;
+        isGameOver = false;
+        ServiceLocator.ForSceneOf(this).TryGetService < PathSpawner >(out PathSpawner pathspawner);
+        pathspawner.player = ballplayer.transform; // Set the player transform in PathSpawner
+
     }
 }

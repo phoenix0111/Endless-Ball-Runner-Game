@@ -26,8 +26,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
         {
-            if(Pausemenu != null) Pausemenu.SetActive(false);
-            if (GameOverScreen != null) GameOverScreen.SetActive(false);
+        Allpaneldisable();
 
             Time.timeScale = 1; // Ensure the game starts at normal speed
 
@@ -46,7 +45,13 @@ public class UIManager : MonoBehaviour
 
         }
 
-        public void ShowGameOverScreen()
+        public void Allpaneldisable()
+        {
+        if (Pausemenu != null) Pausemenu.SetActive(false);
+        if (GameOverScreen != null) GameOverScreen.SetActive(false);
+        }
+
+    public void ShowGameOverScreen()
         {
             scoreText.gameObject.SetActive(false);
             Pausemenu.SetActive(false);
@@ -89,6 +94,7 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1; 
             SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         }
+    
     
 }
 
