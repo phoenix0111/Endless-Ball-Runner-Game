@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Restart")]
     public Vector3 Restartpos;
-    [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject BallPlayer;
 
     public UnityEvent OnGameOver;
 
@@ -31,17 +31,19 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        swipeController = GetComponent<SwipeController>();
-
         ServiceLocator.ForSceneOf(this).Register<GameManager>(this);
-        if (player != null)
-        {
-            swipeController.OnSwipeLeft += player.MoveLeft;
-            swipeController.OnSwipeRight += player.MoveRight;
-        }
-       
-       OnGameOver.AddListener(SetGameOverStateToTrue);
+
+        swipeController = GetComponent<SwipeController>();
+        swipeController.OnSwipeLeft += player.MoveLeft;
+        swipeController.OnSwipeRight += player.MoveRight;
+
+
+
+        OnGameOver.AddListener(SetGameOverStateToTrue);
         OnGameOver.AddListener(uiManager.ShowGameOverScreen);
+
+
+       
     }
 
     void Update()
@@ -77,16 +79,16 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-       GameObject ballplayer = Instantiate(playerPrefab, Restartpos, Quaternion.identity); // Instantiate the player at the restart position
-        ballplayer.SetActive(true);
+       BallPlayer.transform.position = Restartpos; // Reset player position
+        BallPlayer.SetActive(true);
         uiManager.Allpaneldisable(); // Disable all panels
-        player = ballplayer.GetComponent<ballMove>(); // Get the player component from the instantiated player 
-        swipeController = GetComponent<SwipeController>();
-        swipeController.OnSwipeLeft += player.MoveLeft;
-        swipeController.OnSwipeRight += player.MoveRight;
+      
         isGameOver = false;
-        ServiceLocator.ForSceneOf(this).TryGetService < PathSpawner >(out PathSpawner pathspawner);
-        pathspawner.player = ballplayer.transform; // Set the player transform in PathSpawner
+        
 
     }
+
+   
+       
+
 }
