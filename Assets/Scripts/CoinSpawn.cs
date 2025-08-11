@@ -11,7 +11,7 @@ public class CoinSpawn : MonoBehaviour
 
     private void Start()
     {
-        bunchnumer = Random.Range(2, 10);
+        bunchnumer = Random.Range(2, 6);
         spawncoins();
       
     }
@@ -25,7 +25,7 @@ public class CoinSpawn : MonoBehaviour
     {
         for (int i = 0; i < bunchnumer; i++)
         {
-            Instantiate(coinPrefab, playerpos.transform.position + new Vector3(0, 0, i * coinSpacing), Quaternion.identity, spawnParent);
+            Instantiate(coinPrefab, playerpos.transform.position + new Vector3(0, 0, 30)+ new Vector3(0, 0, i * coinSpacing), Quaternion.identity, spawnParent);
         }
        
     }
