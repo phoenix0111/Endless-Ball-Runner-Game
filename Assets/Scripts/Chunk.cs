@@ -8,7 +8,7 @@ public class Chunk : MonoBehaviour
     [SerializeField] private float length = 20.0f;
     
     [SerializeField] private bool shouldGenerateObstacles = false;
-
+    [SerializeField] private bool shouldGenerateCoinsAtStart = false;
     
     [SerializeField] private Vector3 firstElementLocalPosition = Vector3.zero;
     
@@ -109,15 +109,19 @@ public class Chunk : MonoBehaviour
 
     public IEnumerator GenerateCoins()
     {
-        int tries = 10;
-        while (tries > 0 && !ServiceLocator.ForSceneOf(this).TryGetService<CoinManager>(out coinManager))
+        Random.InitState((int)System.DateTime.Now.Ticks);
+        int tries = 50;
+        while (
+               !ServiceLocator.ForSceneOf(this).TryGetService<ObstaclesManager>(out obstaclesManager) ||
+               !ServiceLocator.ForSceneOf(this).TryGetService<CoinManager>(out coinManager))
         {
             tries--;
             yield return null;
         }
 
-        if (coinManager == null)
+        if (coinManager == null || obstaclesManager == null)
         {
+            Debug.Log("Either coin manager or obstacles manager is null");
             yield break;
         }
 
@@ -134,12 +138,13 @@ public class Chunk : MonoBehaviour
             int randomColumn = Random.Range(0, 3);
 
             Vector3 position = transform.position + possibleLocalSpawnPos[randomRow][randomColumn];
-            if(!Physics.CheckSphere(position, chunkSpaceCheckRadius, chunklayerMask))
+            if(!Physics.CheckSphere(position, chunkSpaceCheckRadius, chunklayerMask) || 
+                coinManager.IsCoinThere(position, 2.0f))
             {
                 yield return null;
                 continue;
             }
-            if ( obstaclesManager.IsObstacleThere(position, 0.1f, out Obstacle obstacle))
+            if (obstaclesManager.IsObstacleThere(position, 0.5f, out Obstacle obstacle) && obstacle != null)
             {
                 position += Vector3.up * obstacle.Height;
             }
@@ -151,11 +156,12 @@ public class Chunk : MonoBehaviour
 
     private void GenerateRandomObstacles()
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
         //Select the random lane.
         LaneType randomLaneType = Utility.GetRandomEnum<LaneType>(1, 4);
 
         //Select the random obstacle type.
-        ObstacleType obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 5);
+        ObstacleType obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 6);
 
         //Debug.Log("Random lane: " + randomLaneType.ToString() + ", Obstacle Type: " + obstacleType.ToString());
         
@@ -183,7 +189,7 @@ public class Chunk : MonoBehaviour
                 {
                     while (obstacleType == ObstacleType.BigStone)
                     {
-                        obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 5);
+                        obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 6);
                     }
                 }
 
@@ -194,12 +200,20 @@ public class Chunk : MonoBehaviour
                 currentObstacles.Add(obstacle);
                 break;
             case LaneType.Double:
+                while (obstacleType == ObstacleType.MovingPlatform)
+                {
+                    obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 6);
+                }
                 GenerateObstaclesInDoubleLane(randomRow,
                                               randomColumn,
                                               obstacleType,
                                               obstaclesManager);
                 break;
             case LaneType.Triple:
+                while (obstacleType == ObstacleType.MovingPlatform)
+                {
+                    obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 6);
+                }
                 var obstacle1 = obstaclesManager.Spawn(transform.position + possibleLocalSpawnPos[randomRow][0],
                                        Quaternion.identity,
                                        obstacleType);
@@ -328,7 +342,7 @@ public class Chunk : MonoBehaviour
             }
         }
 
-        currentObstacles.Clear();
+        currentCoins.Clear();
     }
 
 
@@ -380,6 +394,14 @@ public class Chunk : MonoBehaviour
         currentObstacles = new List<Obstacle>();
         currentCoins = new List<Coin>();
         possibleLocalSpawnPos = new List<List<Vector3>>();
+    }
+
+    private void Start()
+    {
+        if(shouldGenerateCoinsAtStart)
+        {
+            StartCoroutine(GenerateCoins());
+        }
     }
 
     private void OnDrawGizmosSelected()

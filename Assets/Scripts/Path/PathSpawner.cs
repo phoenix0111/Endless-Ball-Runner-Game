@@ -89,6 +89,8 @@ public class PathSpawner : MonoBehaviour
 
             activeTiles.Add(current);
         }
+
+        spawnZ += distanceBetweenChunks;
     }
 
     void SpawnTile(bool generateObstacles)

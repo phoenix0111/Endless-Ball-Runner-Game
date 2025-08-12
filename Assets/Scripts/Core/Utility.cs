@@ -30,7 +30,7 @@ public class Utility
         else
         {
             values = System.Enum.GetValues(typeof(T));
-            enumsDict[typeof(T)] = values;
+            enumsDict.Add(typeof(T), values);
         }
 
         if (minInclusive < 0)

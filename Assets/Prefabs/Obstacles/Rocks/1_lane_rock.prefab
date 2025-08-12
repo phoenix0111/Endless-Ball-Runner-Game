@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleType: -1
+  obstacleType: 0
   height: 1
 --- !u!65 &2518137011123586715
 BoxCollider:

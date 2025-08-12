@@ -190,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   length: 80.8
   shouldGenerateObstacles: 1
+  shouldGenerateCoinsAtStart: 0
   firstElementLocalPosition: {x: -2.27, y: 0, z: 77.3}
   rows: 23
   columns: 3
@@ -197,8 +198,8 @@ MonoBehaviour:
   offsetX: 2.5
   offsetZ: -3.5
   chunkSpaceCheckRadius: 0.3
-  obstacleSpawnCount: 8
-  coinsSpawnCount: 20
+  obstacleSpawnCount: 25
+  coinsSpawnCount: 50
   currentObstacles: []
 --- !u!65 &8711646639660682105
 BoxCollider:

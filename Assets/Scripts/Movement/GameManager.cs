@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         OnGameOver.AddListener(SetGameOverStateToTrue);
         OnGameOver.AddListener(uiManager.ShowGameOverScreen);
 
-
+        Application.targetFrameRate = 60;
        
     }
 

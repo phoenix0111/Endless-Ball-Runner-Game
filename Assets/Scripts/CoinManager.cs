@@ -5,6 +5,7 @@ public class CoinManager : MonoBehaviour
     [SerializeField] private Coin[] coinPrefabs;
     [Min(50)]
     [SerializeField] private int maxCoinsCount = 100;
+    [SerializeField] private LayerMask coinLayerMask;
     private ObjectPool<Coin> coinsPool;
     
     public Coin Spawn(Vector3 spawnPosition, Quaternion rotation)
@@ -22,6 +23,11 @@ public class CoinManager : MonoBehaviour
     public void Unspawn(Coin coin)
     {
         coinsPool.ReturnToPool(coin);
+    }
+
+    public bool IsCoinThere(Vector3 position, float checkRadius)
+    {
+        return Physics.CheckSphere(position, checkRadius, coinLayerMask.value);
     }
 
     private Coin CreateCoin()

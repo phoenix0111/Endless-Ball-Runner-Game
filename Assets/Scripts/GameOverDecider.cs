@@ -20,19 +20,19 @@ public class GameOverDecider : MonoBehaviour
             gameManager.OnGameOver?.Invoke();
             gameObject.SetActive(false);
             hasFallenToDeath = true;
-            
+            Debug.Log("Death due to falling");
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         int layerMask = 1 << other.gameObject.layer;
 
-        if((layerMask & gameOverLayerMask) != 0)
+        if((layerMask & gameOverLayerMask.value) != 0)
         {
             ServiceLocator.ForSceneOf(this).TryGetService<GameManager>(out GameManager gameManager);
             gameManager.OnGameOver?.Invoke();
-            gameObject.SetActive(false);
-           
+            //gameObject.SetActive(false);
+            Debug.Log("Game over due to trigger");
         }
     }
 
@@ -40,11 +40,11 @@ public class GameOverDecider : MonoBehaviour
     {
         int layerMask = 1 << other.gameObject.layer;
 
-        if ((layerMask & gameOverLayerMask) != 0)
+        if ((layerMask & gameOverLayerMask.value) != 0)
         {
             ServiceLocator.ForSceneOf(this).TryGetService<GameManager>(out GameManager gameManager);
             gameManager.OnGameOver?.Invoke();
-            
+            Debug.Log("Game over due to collision with " + other.gameObject.name);
         }
     }
 }
