@@ -56,7 +56,9 @@ public class UIManager : MonoBehaviour
            // scoreText.gameObject.SetActive(false);
             Pausemenu.SetActive(false);
             GameOverScreen.SetActive(true);
-        }
+        scoreText.gameObject.SetActive(false); // Hide the score text in the game
+            
+    }
 
         public void PlayGame()
         {

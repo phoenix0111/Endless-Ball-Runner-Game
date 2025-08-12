@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         BallPlayer.SetActive(true);
         BallPlayer.GetComponent<GameOverDecider>().ResetGameOver();
         uiManager.Allpaneldisable(); // Disable all panels
-        uiManager.scoreText.gameObject.SetActive(false);
+        uiManager.scoreText.gameObject.SetActive(true);
         isGameOver = false;
     }
 

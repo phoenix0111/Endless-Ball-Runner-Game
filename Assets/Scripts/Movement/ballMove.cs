@@ -207,12 +207,7 @@ public class ballMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Coin"))
-        {
-            gameManager.CoinUpdate();
-            Destroy(other.gameObject);
-            
-        }
+       
 
         if(other.gameObject.CompareTag("checkpoint"))
         {

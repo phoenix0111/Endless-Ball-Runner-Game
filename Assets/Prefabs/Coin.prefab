@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6882600405470201966}
   - component: {fileID: 4230510311440078768}
   - component: {fileID: 2582356272891339302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 2752001749614872864}
   - component: {fileID: 8709081597090630791}
   - component: {fileID: 5511626156583501615}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

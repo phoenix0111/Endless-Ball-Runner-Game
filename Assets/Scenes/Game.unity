@@ -4425,7 +4425,7 @@ MonoBehaviour:
   gameOverLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  fallHeight: 30
+  fallHeight: 5
 --- !u!4 &9171292953945746796
 Transform:
   m_ObjectHideFlags: 0
