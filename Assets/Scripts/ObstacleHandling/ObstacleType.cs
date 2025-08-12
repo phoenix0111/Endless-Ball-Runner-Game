@@ -6,5 +6,6 @@ public enum ObstacleType
     SmallStone,
     BigStone,
     Cactus,
-    Spikes
+    Spikes,
+    MovingPlatform
 }

@@ -175,13 +175,16 @@ public class Chunk : MonoBehaviour
         switch (randomLaneType)
         {
             case LaneType.Single:
-                //if(obstacleType == ObstacleType.MovingMechanism)
-                //{
-                //    randomColumn = 1; 
-                //}
-                while(obstacleType == ObstacleType.BigStone)
+                if(obstacleType == ObstacleType.MovingPlatform)
                 {
-                    obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 5);
+                    randomColumn = 1; 
+                }
+                else
+                {
+                    while (obstacleType == ObstacleType.BigStone)
+                    {
+                        obstacleType = Utility.GetRandomEnum<ObstacleType>(1, 5);
+                    }
                 }
 
                 var obstacle = obstaclesManager.Spawn(transform.position + possibleLocalSpawnPos[randomRow][randomColumn],
