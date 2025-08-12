@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -85,6 +86,9 @@ public class GameManager : MonoBehaviour
         uiManager.Allpaneldisable(); // Disable all panels
         uiManager.scoreText.gameObject.SetActive(true);
         isGameOver = false;
+        coins = coins - uiManager.coinsneededtoreespawn; // Deduct coins needed to respawn
+        uiManager.coinsneededtoreespawn += 10;
+
     }
 
    

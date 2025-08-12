@@ -19,10 +19,14 @@ public class UIManager : MonoBehaviour
 
     [Header("Pause Game")]
      [SerializeField] GameObject Pausemenu;
-     [SerializeField] GameObject GameOverScreen;
+     [SerializeField] GameObject RespawnScreen;
+        [SerializeField] GameObject GameOverScreen;
 
     [Header("Coins")]
     public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI coinsneedToRespawnDisplay;
+    public int coinsneededtoreespawn = 0; // This will be updated by GameManager
+    public Button RespawnButton;
 
     void Start()
         {
@@ -43,20 +47,46 @@ public class UIManager : MonoBehaviour
               scoreGameOver.text = "Your Score\n" +UIscore.ToString(); // Update the score text in Game Over screen
             }
 
+            if (coinsText != null)        // coins IN GAMEOVER PANEL
+            {
+                coinsText.text = "Coins: " + gameManager.coins.ToString();
         }
+
+            if (coinsneedToRespawnDisplay != null) // coins needed to respawn
+            {
+                coinsneedToRespawnDisplay.text = "Coins needed to respawn: " + coinsneededtoreespawn.ToString();
+            }
+            if (RespawnButton != null) // Respawn button
+            {
+                RespawnButton.interactable = gameManager.coins >= coinsneededtoreespawn;
+        }
+    }
 
         public void Allpaneldisable()
         {
         if (Pausemenu != null) Pausemenu.SetActive(false);
         if (GameOverScreen != null) GameOverScreen.SetActive(false);
-        }
+        if (RespawnScreen != null) RespawnScreen.SetActive(false);
+    }
 
     public void ShowGameOverScreen()
         {
            // scoreText.gameObject.SetActive(false);
+           if(gameManager.coins >= coinsneededtoreespawn)
+        {
             Pausemenu.SetActive(false);
+            RespawnScreen.SetActive(true);
+            scoreText.gameObject.SetActive(false); // Hide the score text in the game
+
+            
+        }
+        else
+        {
+                       Pausemenu.SetActive(false);
             GameOverScreen.SetActive(true);
-        scoreText.gameObject.SetActive(false); // Hide the score text in the game
+            scoreText.gameObject.SetActive(false); // Hide the score text in the game
+        }
+
             
     }
 
