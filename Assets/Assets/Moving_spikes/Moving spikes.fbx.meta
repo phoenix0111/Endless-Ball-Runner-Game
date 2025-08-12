@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc9958dd35945a74c95cbbf5307a4f5e
+guid: 89fb49640bfc4db4f9b64494ec52a6c9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,23 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Anchor
+      name: lambert1
     second: {fileID: 2100000, guid: 04a65c49985bfb44cb9896510eda0925, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Gear
-    second: {fileID: 2100000, guid: e9fbea655eb80f24fa57171514c6747c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Platform
-    second: {fileID: 2100000, guid: 3252708a5004de543994ac9d84d460e0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wood
-    second: {fileID: 2100000, guid: 8ca9d7fb9e266fd47ab22f89204c0a09, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
