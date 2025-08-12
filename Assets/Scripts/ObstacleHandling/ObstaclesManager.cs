@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public class ObstaclesManager : MonoBehaviour
@@ -10,9 +8,8 @@ public class ObstaclesManager : MonoBehaviour
     [Min(0.01f)]
     [SerializeField] private float obstacleCheckRadius = 0.3f;
 
-    private Dictionary<ObstacleKey, ObjectPool<Obstacle>> obstaclePools;
-    private List<ObstacleKey> obstacleKeys;
-
+    private Dictionary<ObstacleType, ObjectPool<Obstacle>> obstaclePools;
+    private Collider[] detectedColliders;
     public float ObstacleCheckRadius { get => obstacleCheckRadius; set => obstacleCheckRadius = value; }
 
     public bool IsObstacleThere(Vector3 position)
@@ -20,23 +17,27 @@ public class ObstaclesManager : MonoBehaviour
         return Physics.CheckSphere(position, obstacleCheckRadius, obstacleLayerMask.value);
     }
 
-    public Obstacle Spawn(Vector3 position, Quaternion rotation, ObstacleType type, LaneHeightType laneHeightType)
+    public bool IsObstacleThere(Vector3 position, float radius, out Obstacle obstacle)
+    {
+        int count = Physics.OverlapSphereNonAlloc(position, radius, detectedColliders, obstacleLayerMask.value);
+        if(count == 0)
+        {
+            obstacle = null;
+            return false;
+        }
+        obstacle = detectedColliders[0].gameObject.GetComponent<Obstacle>();
+        return true;
+    }
+
+    public Obstacle Spawn(Vector3 position, Quaternion rotation, ObstacleType type)
     {
         //Debug.Log("Getting obstacle");
-        IEnumerable<ObstacleKey> enumerable = obstacleKeys.Where(value => value.Type == type && 
-                                                value.Height == laneHeightType);
         
-        if(enumerable.Count() == 0)
+        if(!obstaclePools.ContainsKey(type))
         {
             return null;
         }
-
-        var key = enumerable.ToArray()[0];
-        if(!obstaclePools.ContainsKey(key))
-        {
-            return null;
-        }
-        var instance = obstaclePools[key].Get();
+        var instance = obstaclePools[type].Get();
         if (instance != null)
         {
             instance.transform.position = position;
@@ -55,23 +56,19 @@ public class ObstaclesManager : MonoBehaviour
 
         //Debug.Log("Unspawning obstacle");
         ObstacleType type = obstacle.ObstacleType;
-        LaneHeightType laneHeightType = obstacle.LaneHeightType;
-
-        IEnumerable<ObstacleKey> enumerable = obstacleKeys.Where(value => value.Type == type &&
-                                                value.Height == laneHeightType);
-
-        if (enumerable.Count() == 0)
+        
+        if (!obstaclePools.ContainsKey(type))
         {
             Destroy(obstacle.gameObject);
             return;
         }
-        var key = enumerable.ToArray()[0];
-        obstaclePools[key].ReturnToPool(obstacle);
+        obstaclePools[type].ReturnToPool(obstacle);
     }
 
     private Obstacle CreateObstacle(ObstacleData data)
     {
-        var instance = Instantiate(data.prefab, Vector3.zero, Quaternion.identity);
+        var randomPrefab = data.prefabs[Random.Range(0, data.prefabs.Length)];
+        var instance = Instantiate(randomPrefab, Vector3.zero, Quaternion.identity);
         instance.transform.parent = transform;
         instance.gameObject.SetActive(false);
         return instance;
@@ -94,8 +91,8 @@ public class ObstaclesManager : MonoBehaviour
 
     private void Awake()
     {
-        obstaclePools = new Dictionary<ObstacleKey, ObjectPool<Obstacle>>();
-        obstacleKeys = new List<ObstacleKey>();
+        obstaclePools = new Dictionary<ObstacleType, ObjectPool<Obstacle>>();
+        detectedColliders = new Collider[Constants.MAX_COLLIDER_COUNT];
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -106,7 +103,7 @@ public class ObstaclesManager : MonoBehaviour
         {
             foreach(var data in obstaclesData)
             {
-                var key = new ObstacleKey(data.obstacleType, data.obstacleHeight);
+                var key = data.obstacleType;
 
                 var obstaclePool = new ObjectPool<Obstacle>(() => CreateObstacle(data),
                                                             OnGetObstacle,
@@ -115,7 +112,6 @@ public class ObstaclesManager : MonoBehaviour
                                                             data.maxCount);
 
                 obstaclePools.Add(key, obstaclePool);
-                obstacleKeys.Add(key);
             }
             
         }

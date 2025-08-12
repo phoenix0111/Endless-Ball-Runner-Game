@@ -6,9 +6,8 @@ using UnityEngine;
 [Serializable]
 public class ObstacleData
 {
-    public LaneHeightType obstacleHeight = LaneHeightType.Small;
-    public ObstacleType obstacleType = ObstacleType.Stone;
-    public Obstacle prefab;
+    public ObstacleType obstacleType = ObstacleType.None;
+    public Obstacle[] prefabs;
     [Min(10)]
     public int maxCount = 20;
 }

@@ -5,6 +5,12 @@ public class GameOverDecider : MonoBehaviour
     [SerializeField] private LayerMask gameOverLayerMask;
     [SerializeField] private float fallHeight = 60.0f;
     private bool hasFallenToDeath = false;
+
+    public void ResetGameOver()
+    {
+        hasFallenToDeath = false;
+    }
+
     private void Update()
     {
         float currentY = transform.position.y;

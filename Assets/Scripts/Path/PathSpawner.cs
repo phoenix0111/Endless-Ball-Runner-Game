@@ -5,13 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class PathSpawner : MonoBehaviour
 {
-   public Transform player; // Player reference
+    public Transform player; // Player reference
+    [SerializeField] private Chunk[] startingChunks;
     [SerializeField] private Chunk[] pathPrefabs; // Different types of paths (some with gaps)
     [SerializeField] private float distanceBetweenChunks = 3.0f; // Length of each path tile
     [Min(1)]
-    [SerializeField] private int startTilesWithoutObstaclesCount = 2;
-    [Min(1)]
-    [SerializeField] private int startTilesWithObstaclesCount = 7; // Number of tiles with obstacles at start
+    [SerializeField] private int startingTilesCount = 7; // Number of tiles with obstacles at start
     [Min(1)]
     [SerializeField] private int tilesCountAfterResettingOrigin = 5;
     [Min(0.1f)]
@@ -26,12 +25,13 @@ public class PathSpawner : MonoBehaviour
     {
         ServiceLocator.ForSceneOf(this).Register<PathSpawner>(this);
         Random.InitState((int)System.DateTime.Now.Ticks);
-        // Spawn initial path tiles
-        for (int i = 0; i < startTilesWithoutObstaclesCount; i++)
-        {
-            SpawnTile(false);
-        }
-            for (int i = 0; i < startTilesWithObstaclesCount; i++)
+        
+        //Adjust spawnZ for initial tiles
+        AdjustSpawnZ();
+
+        
+        //Then spawn tiles with obstacles
+        for (int i = 0; i < startingTilesCount; i++)
         {
             SpawnTile(true);
         }
@@ -74,13 +74,33 @@ public class PathSpawner : MonoBehaviour
         spawnZ -= distance;
     }
 
+    private void AdjustSpawnZ()
+    {
+        for(int i = 0; i < startingChunks.Length; i++)
+        {
+            Chunk current = startingChunks[i];
+            Chunk next = (i + 1 < startingChunks.Length) ? startingChunks[i + 1] : null;
+            spawnZ += current.Length;
+            if (next != null) 
+            {
+                float gap = (next.transform.position.z - (current.transform.position.z + current.Length));
+                spawnZ += gap;
+            }
+
+            activeTiles.Add(current);
+        }
+    }
+
     void SpawnTile(bool generateObstacles)
     {
         // Randomly pick a prefab from the list
         Chunk prefab = pathPrefabs[Random.Range(0, pathPrefabs.Length)];
         Chunk newTile = Instantiate(prefab, Vector3.forward * spawnZ, Quaternion.identity);
+        
         newTile.ShouldGenerateObstacles = generateObstacles;
         newTile.StartCoroutine(newTile.GenerateObstacles());
+        newTile.StartCoroutine(newTile.GenerateCoins());
+
         activeTiles.Add(newTile);
         spawnZ += newTile.Length + distanceBetweenChunks;
     }
