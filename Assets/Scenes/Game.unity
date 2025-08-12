@@ -1372,7 +1372,7 @@ MonoBehaviour:
     maxCount: 100
   obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 68
   obstacleCheckRadius: 12
 --- !u!4 &587011372
 Transform:
@@ -2690,39 +2690,39 @@ PrefabInstance:
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[0]'
       value: 
-      objectReference: {fileID: 1460209049}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[1]'
       value: 
-      objectReference: {fileID: 1460209048}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[2]'
       value: 
-      objectReference: {fileID: 1460209047}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[3]'
       value: 
-      objectReference: {fileID: 1460209046}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[4]'
       value: 
-      objectReference: {fileID: 1460209045}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[5]'
       value: 
-      objectReference: {fileID: 1460209044}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[6]'
       value: 
-      objectReference: {fileID: 1460209043}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[7]'
       value: 
-      objectReference: {fileID: 1460209042}
+      objectReference: {fileID: 0}
     - target: {fileID: 2800641616391917712, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: 'currentObstacles.Array.data[8]'
       value: 
-      objectReference: {fileID: 1460209041}
+      objectReference: {fileID: 0}
     - target: {fileID: 4629318086900179125, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
       propertyPath: m_Name
       value: Grass Type Platform 2
@@ -2784,105 +2784,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
---- !u!114 &1460209041 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5654663571910512217, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209042 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 884616169910940823, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209043 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2505403874757956348, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209044 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6742266297391804484, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209045 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1303350313069078371, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209046 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5892250095544486130, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209047 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9100860535145560009, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209048 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2114669023500669463, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1460209049 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4694293998176112397, guid: 871de6b9f69173b4bafd7bb09b1c98a9, type: 3}
-  m_PrefabInstance: {fileID: 1460209040}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db0d854d53a2754e80a0aa14cd41b6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1646815511
 GameObject:
   m_ObjectHideFlags: 0
