@@ -4215,7 +4215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0944356866bd6294098b15a2ed86b772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneDistance: 2
+  laneDistance: 2.8
   laneChangeSpeed: 7
   baseSpeed: 7
   boostSpeed: 14
