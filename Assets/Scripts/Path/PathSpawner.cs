@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.Tilemaps;
 
 public class PathSpawner : MonoBehaviour
 {
     public Transform player; // Player reference
     [SerializeField] private Chunk[] startingChunks;
     [SerializeField] private Chunk[] pathPrefabs; // Different types of paths (some with gaps)
+    [Min(100)]
+    [SerializeField] private int maxChunkCount = 100;
     [SerializeField] private float distanceBetweenChunks = 3.0f; // Length of each path tile
     [Min(1)]
     [SerializeField] private int startingTilesCount = 7; // Number of tiles with obstacles at start
@@ -16,13 +16,20 @@ public class PathSpawner : MonoBehaviour
     [Min(0.1f)]
     [SerializeField] private float pathDistance = 50.0f;
     
-
     private float spawnZ = 0f;
-   
     private List<Chunk> activeTiles = new List<Chunk>();
+    private ObjectPool<Chunk> chunkPool;
 
     void Start()
     {
+        if (chunkPool == null)
+        {
+            chunkPool = new ObjectPool<Chunk>(CreateChunk,
+                                              OnGetChunk,
+                                              OnReturnChunk,
+                                              OnDestroyChunk,
+                                              maxChunkCount);
+        }
         ServiceLocator.ForSceneOf(this).Register<PathSpawner>(this);
         Random.InitState((int)System.DateTime.Now.Ticks);
         
@@ -62,7 +69,29 @@ public class PathSpawner : MonoBehaviour
 
     }
 
-    
+    private Chunk CreateChunk()
+    {
+        int randomIndex = Random.Range(0, pathPrefabs.Length);
+        var instance = Instantiate(pathPrefabs[randomIndex], Vector3.zero, Quaternion.identity);
+        instance.transform.parent = transform;
+        instance.gameObject.SetActive(false);
+        return instance;
+    }
+
+    private void OnGetChunk(Chunk chunk)
+    {
+        chunk.gameObject.SetActive(true);
+    }
+
+    private void OnReturnChunk(Chunk chunk)
+    {
+        chunk.gameObject.SetActive(false);
+    }
+
+    private void OnDestroyChunk(Chunk chunk)
+    {
+        Destroy(chunk.gameObject);
+    }
 
     private void ResetOriginOfTiles(float distance)
     {
@@ -97,8 +126,10 @@ public class PathSpawner : MonoBehaviour
     {
         // Randomly pick a prefab from the list
         Chunk prefab = pathPrefabs[Random.Range(0, pathPrefabs.Length)];
-        Chunk newTile = Instantiate(prefab, Vector3.forward * spawnZ, Quaternion.identity);
-        
+        Chunk newTile = chunkPool.Get();//Instantiate(prefab, Vector3.forward * spawnZ, Quaternion.identity);
+        newTile.gameObject.transform.position = Vector3.forward * spawnZ;
+        newTile.gameObject.transform.rotation = Quaternion.identity;
+
         newTile.ShouldGenerateObstacles = generateObstacles;
         newTile.StartCoroutine(newTile.GenerateObstacles());
         newTile.StartCoroutine(newTile.GenerateCoins());
@@ -130,10 +161,11 @@ public class PathSpawner : MonoBehaviour
 
         for (int i = 0; i < lastTileIndexBehindThePlayer; i++)
         {
-            Destroy(activeTiles[0]);
+            if(!chunkPool.ReturnToPool(activeTiles[0]))
+            {
+                Destroy(activeTiles[0].gameObject);
+            }
             activeTiles.RemoveAt(0);
         }
-
-        
     }
 }

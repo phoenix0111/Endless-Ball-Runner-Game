@@ -199,7 +199,7 @@ MonoBehaviour:
   offsetZ: -3.5
   chunkSpaceCheckRadius: 0.3
   obstacleSpawnCount: 25
-  coinsSpawnCount: 50
+  coinsSpawnCount: 20
   currentObstacles: []
 --- !u!65 &8711646639660682105
 BoxCollider:

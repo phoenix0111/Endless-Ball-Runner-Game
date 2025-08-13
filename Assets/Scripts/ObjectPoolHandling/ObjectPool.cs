@@ -43,15 +43,16 @@ public class ObjectPool<T>
     }
 
 
-    public void ReturnToPool(T value)
+    public bool ReturnToPool(T value)
     {
         if (queue.Count == maxCount)
         {
             Debug.LogError("Pool is full, can't take anymore.");
-            return;
+            return false;
         }
         OnReturnToPool?.Invoke(value);
         queue.Enqueue(value);
+        return true;
     }
 
     public void Clear()
