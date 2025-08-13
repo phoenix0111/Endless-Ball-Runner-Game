@@ -3,6 +3,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private LayerMask playerLayerMask;
+    [SerializeField] GameObject sparklingParticle;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -13,7 +14,11 @@ public class Coin : MonoBehaviour
             if(ServiceLocator.ForSceneOf(this).
                TryGetService<GameManager>(out GameManager gameManager))
             {
+                GameObject particle  = Instantiate(sparklingParticle, transform.position, Quaternion.identity);
+                sparklingParticle.GetComponent<ParticleSystem>().Play();
                 gameManager.CoinUpdate();
+                Destroy(particle, 1f);
+
             }
         }
 
@@ -30,4 +35,5 @@ public class Coin : MonoBehaviour
         transform.Rotate(Vector3.up, 100 * Time.deltaTime, Space.World);
     }
     
+   
 }
