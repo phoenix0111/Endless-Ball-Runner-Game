@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
 
         OnGameOver.AddListener(SetGameOverStateToTrue);
         OnGameOver.AddListener(uiManager.ShowGameOverScreen);
+        OnGameOver.AddListener(DisableBall);
 
         Application.targetFrameRate = -1;
        
@@ -56,6 +57,11 @@ public class GameManager : MonoBehaviour
             increaseDifficulty();
             nextScoreThreshold += 100; // Set next threshold (200, 300, etc.)
         }
+    }
+
+    private void DisableBall()
+    {
+        BallPlayer.SetActive(false);
     }
 
     void ScoreLogic()
