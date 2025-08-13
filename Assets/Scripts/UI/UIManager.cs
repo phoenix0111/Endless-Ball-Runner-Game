@@ -10,8 +10,10 @@ public class UIManager : MonoBehaviour
     [Header("Essentials")]
      [SerializeField] GameManager gameManager;
      [SerializeField] InputActions PlayerInputManager;
-    [SerializeField] private string gameSceneName = "Game";
-
+     [SerializeField] private string gameSceneName = "Final_Game";
+     public Slider SpeedShowcaseSlider; // Slider for volume controlSpped
+    [SerializeField] ballMove player; // Reference to the player script for speed control
+     
     [Header("Score")]
      public TextMeshProUGUI scoreText;
      public float UIscore = 0;
@@ -20,13 +22,13 @@ public class UIManager : MonoBehaviour
     [Header("Pause Game")]
      [SerializeField] GameObject Pausemenu;
      [SerializeField] GameObject RespawnScreen;
-        [SerializeField] GameObject GameOverScreen;
+     [SerializeField] GameObject GameOverScreen;
 
     [Header("Coins")]
-    public TextMeshProUGUI coinsText;
-    public TextMeshProUGUI coinsneedToRespawnDisplay;
-    public int coinsneededtoreespawn = 0; // This will be updated by GameManager
-    public Button RespawnButton;
+     public TextMeshProUGUI coinsText;
+     public TextMeshProUGUI coinsneedToRespawnDisplay;
+     public int coinsneededtoreespawn = 0; // This will be updated by GameManager
+     public Button RespawnButton;
 
     void Start()
         {
@@ -50,7 +52,7 @@ public class UIManager : MonoBehaviour
             if (coinsText != null)        // coins IN GAMEOVER PANEL
             {
                 coinsText.text = "Coins: " + gameManager.coins.ToString();
-        }
+            }
 
             if (coinsneedToRespawnDisplay != null) // coins needed to respawn
             {
@@ -59,7 +61,9 @@ public class UIManager : MonoBehaviour
             if (RespawnButton != null) // Respawn button
             {
                 RespawnButton.interactable = gameManager.coins >= coinsneededtoreespawn;
-        }
+            }
+
+        speedSliderShow(); // Update the speed slider in the UI
     }
 
         public void Allpaneldisable()
@@ -127,6 +131,13 @@ public class UIManager : MonoBehaviour
             SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         }
     
+    void speedSliderShow()
+    {
+        SpeedShowcaseSlider.maxValue = player.boostSpeed;
+        SpeedShowcaseSlider.minValue = player.baseSpeed;
+        SpeedShowcaseSlider.value = player.currentSpeed;
+
+    }
     
 }
 

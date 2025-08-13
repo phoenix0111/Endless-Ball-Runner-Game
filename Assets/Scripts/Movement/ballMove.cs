@@ -18,7 +18,7 @@ public class ballMove : MonoBehaviour
     [Header("Movement")]
     public float baseSpeed = 5f;
     public float boostSpeed = 10f;
-    private float currentSpeed;
+    public float currentSpeed;
     private Vector3 targetPosition;
     private Rigidbody rb;
 
