@@ -70,6 +70,7 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  sparklingParticle: {fileID: 8285761504398992094, guid: 610e4a07830f35349983b0409358a1d4, type: 3}
 --- !u!1 &4972470192136194157
 GameObject:
   m_ObjectHideFlags: 0
