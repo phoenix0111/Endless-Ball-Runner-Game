@@ -138,7 +138,8 @@ public class Chunk : MonoBehaviour
             int randomColumn = Random.Range(0, 3);
 
             Vector3 position = transform.position + possibleLocalSpawnPos[randomRow][randomColumn];
-            if(!Physics.CheckSphere(position, chunkSpaceCheckRadius, chunklayerMask) || 
+            yield return null;
+            if (!Physics.CheckSphere(position, chunkSpaceCheckRadius, chunklayerMask) || 
                 coinManager.IsCoinThere(position, 2.0f))
             {
                 yield return null;
