@@ -52,11 +52,6 @@
                 "value": "{\"m_Value\":true}"
             },
             {
-                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "key": "Mesh.RebuildNormals",
-                "value": "{\"m_Value\":true}"
-            },
-            {
                 "type": "UnityEngine.Polybrush.BrushMirror, Unity.Polybrush, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "Brush.MirrorAxis",
                 "value": "{\"m_Value\":0}"
@@ -82,14 +77,9 @@
                 "value": "{\"m_Value\":5.0}"
             },
             {
-                "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "key": "Brush.VertexBillboardSize",
-                "value": "{\"m_Value\":2.0}"
-            },
-            {
                 "type": "UnityEditor.Polybrush.PrefabLoadout, Unity.Polybrush.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ScatteringEditor.userLoadout",
-                "value": "{\"m_Value\":{\"infos\":[{\"palette\":{\"fileID\":11400000,\"guid\":\"4bfaf9438a6a5fc4db66fc681aa99642\",\"type\":2},\"prefab\":{\"fileID\":6175009139770219659,\"guid\":\"7c07dca86c5829346a0e4d2d25da510f\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"4bfaf9438a6a5fc4db66fc681aa99642\",\"type\":2},\"prefab\":{\"fileID\":6112745254040654563,\"guid\":\"039ce3c7b8ea46c4bb1d2a991b71af70\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"4bfaf9438a6a5fc4db66fc681aa99642\",\"type\":2},\"prefab\":{\"fileID\":5268218745505664017,\"guid\":\"60cabcf19e13ee34c9b2572dafa0c15d\",\"type\":3}},{\"palette\":{\"fileID\":11400000,\"guid\":\"4bfaf9438a6a5fc4db66fc681aa99642\",\"type\":2},\"prefab\":{\"fileID\":3238606647822701286,\"guid\":\"e8ab7095057b7c345b98d1e45d58958d\",\"type\":3}}]}}"
+                "value": "{\"m_Value\":{\"infos\":[]}}"
             },
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
