@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [Header("Essentials")]
      [SerializeField] GameManager gameManager;
      [SerializeField] InputActions PlayerInputManager;
-
+    [SerializeField] private string gameSceneName = "Game";
 
     [Header("Score")]
      public TextMeshProUGUI scoreText;
@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
         public void PlayGame()
         {
             Time.timeScale = 1; // Ensure the game is running at normal speed
-            SceneManager.LoadScene("Game"); // Load the game scene
+            SceneManager.LoadScene(gameSceneName); // Load the game scene
         }
 
         public void pausegame()
