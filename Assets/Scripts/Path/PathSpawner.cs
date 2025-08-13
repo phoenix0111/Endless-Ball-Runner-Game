@@ -55,7 +55,7 @@ public class PathSpawner : MonoBehaviour
         //Then delete the tiles behind the player.
 
 
-        Debug.Log("Path Distance: " + pathDistance + ", PlayerZ: " + playerZ);
+       // Debug.Log("Path Distance: " + pathDistance + ", PlayerZ: " + playerZ);
         if (playerZ > pathDistance)
         {
             ResetOriginOfTiles(playerZ);

@@ -179,7 +179,7 @@ public class ballMove : MonoBehaviour
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // Reset vertical velocity
         rb.AddForce(Vector3.up * force, ForceMode.Impulse);
-        Debug.Log("Jump with force: " + force);
+        // Debug.Log("Jump with force: " + force);
     }
 
     public void MoveLeft()

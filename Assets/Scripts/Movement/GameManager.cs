@@ -43,13 +43,19 @@ public class GameManager : MonoBehaviour
         OnGameOver.AddListener(SetGameOverStateToTrue);
         OnGameOver.AddListener(uiManager.ShowGameOverScreen);
 
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = -1;
        
     }
 
     void Update()
     {
         ScoreLogic();
+
+        if (score >= nextScoreThreshold)
+        {
+            increaseDifficulty();
+            nextScoreThreshold += 100; // Set next threshold (200, 300, etc.)
+        }
     }
 
     void ScoreLogic()
@@ -91,7 +97,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-   
+
+   void increaseDifficulty()
+    {
+
+        player.baseSpeed += SpeedIncreaseRate; // Increase player's base speed
+        player.boostSpeed += SpeedIncreaseRate; // Increase player's boost speed
        
+    }
 
 }
