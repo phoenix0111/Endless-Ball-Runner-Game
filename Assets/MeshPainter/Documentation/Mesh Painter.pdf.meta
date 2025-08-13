@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 678f136b2368f0441a51adbf864b0d77
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 15433
+  packageName: Mesh Painter
+  packageVersion: 2.1.3
+  assetPath: Assets/MeshPainter/Documentation/Mesh Painter.pdf
+  uploadId: 242800

@@ -1,9 +1,22 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 1cd53a3979168e942a6a3611b0839b7b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects: {}
+=======
+guid: 679832f9e00d128478b875369321b714
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 6b45516babcb8bb4e8a5251384c3487b, type: 2}
+>>>>>>> Stashed changes
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,16 +46,26 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
+<<<<<<< Updated upstream
     globalScale: 10
     meshCompression: 1
+=======
+    globalScale: 1
+    meshCompression: 0
+>>>>>>> Stashed changes
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
+<<<<<<< Updated upstream
     importCameras: 0
     importLights: 0
+=======
+    importCameras: 1
+    importLights: 1
+>>>>>>> Stashed changes
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
@@ -68,7 +91,11 @@ ModelImporter:
     useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
+<<<<<<< Updated upstream
     normalSmoothAngle: 0
+=======
+    normalSmoothAngle: 60
+>>>>>>> Stashed changes
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
@@ -88,7 +115,11 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+<<<<<<< Updated upstream
     globalScale: 10
+=======
+    globalScale: 1
+>>>>>>> Stashed changes
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
