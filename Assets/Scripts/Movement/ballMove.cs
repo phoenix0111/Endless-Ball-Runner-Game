@@ -21,6 +21,7 @@ public class ballMove : MonoBehaviour
     public float currentSpeed;
     private Vector3 targetPosition;
     private Rigidbody rb;
+    private Animator animator;
 
     [Header("Swipe Settings")]
     private Vector2 startTouchPos;
@@ -49,6 +50,7 @@ public class ballMove : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         inputActions = new InputActions();
         gameManager = FindAnyObjectByType<GameManager>();
 
@@ -100,6 +102,11 @@ public class ballMove : MonoBehaviour
         }
 
         Debug.Log("Current Speed: " + currentSpeed);
+
+        if (animator != null && isGrounded)
+        {
+            animator.SetBool("jump", false);
+        }
     }
 
    
@@ -180,6 +187,10 @@ public class ballMove : MonoBehaviour
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z); // Reset vertical velocity
         rb.AddForce(Vector3.up * force, ForceMode.Impulse);
         // Debug.Log("Jump with force: " + force);
+        if(animator != null)
+        {
+            animator.SetBool("jump", true);
+        }
     }
 
     public void MoveLeft()
