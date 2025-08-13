@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver)
         {
+            
             return;
         }
 
