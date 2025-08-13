@@ -14,6 +14,7 @@ Material:
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
   - _ALPHATEST_ON
+  - _EMISSION
   - _RECEIVE_SHADOWS_OFF
   - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
@@ -44,7 +45,9 @@ Material:
     m_Floats:
     - _AlphaClip: 1
     - _Cull: 0
-    m_Colors: []
+    m_Colors:
+    - _BaseColor: {r: 0.90849674, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.90849674, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &941067212451748469

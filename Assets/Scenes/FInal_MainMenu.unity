@@ -521,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: -174}
+  m_AnchoredPosition: {x: 11, y: -248.00003}
   m_SizeDelta: {x: 324.1, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &929863129
@@ -652,6 +652,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   gameSceneName: Final_Game
+  SpeedShowcaseSlider: {fileID: 0}
+  player: {fileID: 0}
   scoreText: {fileID: 0}
   UIscore: 0
   scoreGameOver: {fileID: 0}
@@ -861,7 +863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 181.54755, y: 121}
+  m_AnchoredPosition: {x: 181.54755, y: 199}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1646767029
@@ -884,7 +886,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Project Ball
+  m_text: "Project \nBall"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8bcb95e4a0515074191eeecb0058efd1, type: 2}
   m_sharedMaterial: {fileID: 1328491321504815739, guid: 8bcb95e4a0515074191eeecb0058efd1, type: 2}
@@ -1074,7 +1076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 11, y: -34}
+  m_AnchoredPosition: {x: 11, y: -108}
   m_SizeDelta: {x: 324.1, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1996639706
