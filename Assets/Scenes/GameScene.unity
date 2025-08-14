@@ -551,8 +551,8 @@ MonoBehaviour:
   - {fileID: 6272697048967957537, guid: a2ad5a50d505dfa4fbdc44b07d968896, type: 3}
   - {fileID: 6272697048967957537, guid: cd915217e9309b946b378da98e9a9513, type: 3}
   - {fileID: 6272697048967957537, guid: 5c78515fb841ee448af59c106a0b1bfd, type: 3}
-  initialSpawnCount: 15
-  pathLength: 17
+  initialSpawnCount: 10
+  pathLength: 19.8
   Player: {fileID: 683000294}
   spawnStartPoint: {fileID: 774869722}
 --- !u!1 &797536267
