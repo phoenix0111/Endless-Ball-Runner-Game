@@ -289,6 +289,8 @@ MonoBehaviour:
   maxX: 1.6
   isJumping: 0
   jumpForce: 6
+  hoverHeight: 1.1
+  hoverStrength: 20
 --- !u!65 &683000291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1771,7 +1773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1291253630116349355}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Empty Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

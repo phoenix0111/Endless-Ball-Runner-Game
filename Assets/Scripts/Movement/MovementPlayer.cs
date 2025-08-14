@@ -17,8 +17,10 @@ public class MovementPlayer : MonoBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] bool isJumping = false;
-    public float jumpForce = 10f; 
-   
+    public float jumpForce = 10f;
+    public float hoverHeight = 1.1f;
+    public float hoverStrength = 20f;
+
 
     void Start()
     {
@@ -32,8 +34,14 @@ public class MovementPlayer : MonoBehaviour
         movement();
         jump();
 
-        
-            
+
+        float difference = hoverHeight - transform.position.y;
+
+        // Only apply when on ground
+        if (!isJumping && difference > 0)
+        {
+            rb.AddForce(Vector3.up * difference * hoverStrength, ForceMode.Acceleration);
+        }
 
 
     }

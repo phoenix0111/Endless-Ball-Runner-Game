@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381153404980109920}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: L_2_lane_platform 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4313078271678676919, guid: aac2abd87e03eae439cfcfbb25458787, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8628374556258966393, guid: aac2abd87e03eae439cfcfbb25458787, type: 3}
       propertyPath: m_LocalPosition.x
@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 454328855762458653, guid: 2418bd0c8ac668d4784c64cd2d2f8632, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7260857936498130065, guid: 2418bd0c8ac668d4784c64cd2d2f8632, type: 3}
       propertyPath: m_LocalPosition.x
