@@ -12,6 +12,8 @@ public class MovementPlayer : MonoBehaviour
     private Rigidbody rb;
     Vector2 startTouchPos;
     bool isSwiping = false;
+    [SerializeField] float maxX = 1.6f;
+    
 
     [Header("Jump Settings")]
     [SerializeField] bool isJumping = false;
@@ -30,6 +32,9 @@ public class MovementPlayer : MonoBehaviour
         movement();
         jump();
 
+        
+            
+
 
     }
 
@@ -37,14 +42,25 @@ public class MovementPlayer : MonoBehaviour
     {
 
         // Always move forward
-        Vector3 velocity = new Vector3(0, rb.linearVelocity.y, forwardSpeed);
+        Vector3 velocity = new Vector3(0, rb.linearVelocity.y,forwardSpeed);
 
-        if (isMobile)
-            velocity += HandleMobileInput();
-        else
-            velocity += HandlePCMouseInput();
+        Vector3 moveInput = isMobile ? HandleMobileInput() : HandlePCMouseInput();
+
+        // If moving left but already at left boundary
+        if (transform.position.x <= -maxX && moveInput.x < 0)
+            moveInput.x = 0;
+
+        // If moving right but already at right boundary
+        if (transform.position.x >= maxX && moveInput.x > 0)
+            moveInput.x = 0;
+
+        velocity += moveInput;
 
         rb.linearVelocity = velocity;
+
+       // Vector3 move = Vector3.forward * forwardSpeed * Time.deltaTime;
+        //transform.Translate(move, Space.World);
+
     }
 
 
@@ -104,7 +120,7 @@ public class MovementPlayer : MonoBehaviour
     void jump()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        if (Input.GetKey(KeyCode.Space) && !isJumping)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true; // Set jumping state to true
@@ -125,5 +141,7 @@ public class MovementPlayer : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             isJumping = false;
+
+      
     }
 }

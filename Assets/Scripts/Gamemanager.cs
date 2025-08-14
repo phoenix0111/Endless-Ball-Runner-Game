@@ -11,6 +11,10 @@ public class Gamemanager : MonoBehaviour
     private float Fscore = 0f;
     [SerializeField] float scoreMultiplier = 1f;
 
+    [Header("DifficultySettings")]
+    [SerializeField] int ScoreThreshold = 100;
+    [SerializeField] float ScoreMultiplyerRate = 2;
+
     void Start()
     {
         
@@ -20,6 +24,14 @@ public class Gamemanager : MonoBehaviour
     void Update()
     {
         ScoreCalculate();
+
+
+
+        if (score >= ScoreThreshold)
+        {
+            increaseDifficulty();
+            ScoreThreshold += 100; // Set next threshold (200, 300, etc.)
+        }
     }
 
     void ScoreCalculate()
@@ -29,5 +41,14 @@ public class Gamemanager : MonoBehaviour
         score = Mathf.FloorToInt(Fscore);
    
         uiManager.scoreText.text = "Score: " + score.ToString();
+    }
+
+    void increaseDifficulty()
+    {
+
+        Player.forwardSpeed *= ScoreMultiplyerRate; // Increase player's base speed
+        Player.sidewaysSpeed *= ScoreMultiplyerRate;
+        
+
     }
 }
