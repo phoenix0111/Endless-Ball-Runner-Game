@@ -9,6 +9,8 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] Gamemanager gamemanager;
     [SerializeField] CoinSpawner coinSpawner;
     [SerializeField] uiManager uiManager;
+    public GameObject Player1Skin;
+    public GameObject Player2Skin;
     
 
     [Header("Movement Settings")]
@@ -28,6 +30,12 @@ public class MovementPlayer : MonoBehaviour
 
     void Start()
     {
+        int playerIndexChoose = PlayerPrefs.GetInt("CharIndex", 1);
+
+        if (playerIndexChoose == 1) Player1Skin.SetActive(true); Player2Skin.SetActive(false);
+
+        if (playerIndexChoose == 2) Player1Skin.SetActive(false); Player2Skin.SetActive(true);
+
         rb = GetComponent<Rigidbody>();
        
         isMobile = Application.platform == RuntimePlatform.Android ;

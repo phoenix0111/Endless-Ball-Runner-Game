@@ -7,9 +7,11 @@ public class RegionLoader : MonoBehaviour
     [Header("Essentrials")]
     public int Coin;
 
-    [Header("Regions Panels")]
+
+    [Header(" Panels")]
     [SerializeField] GameObject Region1Panel;
     [SerializeField] GameObject Region2Panel;
+    [SerializeField] GameObject OutfitShopPanel;
 
     [Header("Region2 Lock")]
     [SerializeField] GameObject Region2Lock;
@@ -20,13 +22,17 @@ public class RegionLoader : MonoBehaviour
     [SerializeField] Button Region2Select;
 
 
+    [Header("Shop Essentials")]
+    [SerializeField] int CharacterIndex = 1;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Region1Panel.SetActive(true);
         Region2Panel.SetActive(false);
+        OutfitShopPanel.gameObject.SetActive(false);
 
-      Coin =   PlayerPrefs.GetInt("Coins");
+        Coin =   PlayerPrefs.GetInt("Coins");
         Region2Select.interactable = false;
 
 
@@ -67,4 +73,32 @@ public class RegionLoader : MonoBehaviour
         SceneManager.LoadScene("GameScene2");
     }
 
+    public void OutfitShopLoad()
+    {
+        OutfitShopPanel.gameObject.SetActive(true);
+    }
+
+    public void OutfitShopClose()
+    {
+        OutfitShopPanel.gameObject.SetActive(false);
+        Region1Panel.gameObject.SetActive(true);
+    }
+
+    public void CharSelect1()
+    {
+        CharacterIndex = 1;
+        PlayerPrefs.SetInt("CharIndex", CharacterIndex);
+        PlayerPrefs.Save();
+        OutfitShopClose();
+
+    }
+
+    public void CharSelect2()
+    {
+        CharacterIndex = 2;
+        PlayerPrefs.SetInt("CharIndex", CharacterIndex);
+        PlayerPrefs.Save();
+        OutfitShopClose();
+
+    }
 }

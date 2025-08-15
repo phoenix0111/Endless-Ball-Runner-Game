@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [Header("Movement")]
-     [SerializeField] SwipeController swipeController;
+   //  [SerializeField] SwipeController swipeController;
      [SerializeField] ballMove player;
 
 
@@ -36,10 +36,7 @@ public class GameManager : MonoBehaviour
     {
         ServiceLocator.ForSceneOf(this).Register<GameManager>(this);
 
-        swipeController = GetComponent<SwipeController>();
-        swipeController.OnSwipeLeft += player.MoveLeft;
-        swipeController.OnSwipeRight += player.MoveRight;
-
+       
 
 
         OnGameOver.AddListener(SetGameOverStateToTrue);

@@ -6,7 +6,7 @@ public class ballMove : MonoBehaviour
 {
     [Header("Essentials")]
    private GameManager gameManager;
-    private InputActions inputActions;
+   // private InputActions inputActions;
 
 
     [Header("Lane Settings")]
@@ -51,24 +51,12 @@ public class ballMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        inputActions = new InputActions();
+     //   inputActions = new InputActions();
         gameManager = FindAnyObjectByType<GameManager>();
 
     }
 
-    void OnEnable()
-    {
-        inputActions.Enable();
-        inputActions.Gameplay.TouchPress.started += ctx => OnTouchStart();
-        inputActions.Gameplay.TouchPress.canceled += ctx => OnTouchEnd();
-    }
-
-    void OnDisable()
-    {
-        inputActions.Gameplay.TouchPress.started -= ctx => OnTouchStart();
-        inputActions.Gameplay.TouchPress.canceled -= ctx => OnTouchEnd();
-        inputActions.Disable();
-    }
+   
 
     void Start()
     {
