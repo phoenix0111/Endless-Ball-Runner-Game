@@ -109,10 +109,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Middle_obstacle
       objectReference: {fileID: 0}
-    - target: {fileID: 454328855762458653, guid: 2418bd0c8ac668d4784c64cd2d2f8632, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7260857936498130065, guid: 2418bd0c8ac668d4784c64cd2d2f8632, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -175,10 +171,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right_obstacle
       objectReference: {fileID: 0}
-    - target: {fileID: 536122341108850965, guid: 42d62d5fa1591b74b8caa82b569bd98e, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8528310218163378228, guid: 42d62d5fa1591b74b8caa82b569bd98e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -240,10 +232,6 @@ PrefabInstance:
     - target: {fileID: 4313078271678676919, guid: aac2abd87e03eae439cfcfbb25458787, type: 3}
       propertyPath: m_Name
       value: Left_obstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313078271678676919, guid: aac2abd87e03eae439cfcfbb25458787, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8628374556258966393, guid: aac2abd87e03eae439cfcfbb25458787, type: 3}
       propertyPath: m_LocalPosition.x

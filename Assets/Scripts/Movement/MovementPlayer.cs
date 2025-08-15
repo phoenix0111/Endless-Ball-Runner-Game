@@ -8,6 +8,8 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] bool isMobile;
     [SerializeField] Gamemanager gamemanager;
     [SerializeField] CoinSpawner coinSpawner;
+    [SerializeField] uiManager uiManager;
+    
 
     [Header("Movement Settings")]
     public float forwardSpeed = 15f;   
@@ -157,6 +159,13 @@ public class MovementPlayer : MonoBehaviour
             isJumping = false;
 
       
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            forwardSpeed = 0f;
+            sidewaysSpeed = 0f;
+            uiManager.OnPlayerDead();
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

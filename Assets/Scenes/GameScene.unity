@@ -1896,6 +1896,7 @@ MonoBehaviour:
   Pausemenu: {fileID: 735877831}
   Respawnmenu: {fileID: 2126693234}
   GameOvermenu: {fileID: 1039903083}
+  coinsneededtoRespawn: 10
 --- !u!114 &840592609
 MonoBehaviour:
   m_ObjectHideFlags: 0
