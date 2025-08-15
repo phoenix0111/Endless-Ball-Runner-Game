@@ -10,18 +10,22 @@ public class PathGenerator : MonoBehaviour
     public float pathLength = 10f;
 
     [Header("Special Path Settings")]
-   
-    public int specialIndex1 = 8; // index in pathPrefabs for special path 2
-    public int scoreInterval = 500; // spawn every 500 score
+    public int blueTileIndex = 7;     // blue rare tile
+    public int yellowTileIndex = 8;   // yellow special tile
+      
+    public int blueTileCooldownLength = 6; // how many tiles after blue until it can appear again
+    public float blueTileChance = 0.1f; // 10% chance when allowed
 
-    private bool queueSpecial = false; // flag to force next path to be special
-    private int lastSpecialScore = -1; // track milestone to avoid repeats
-    private int lastSpecialIndex = -1; // remember which special was last
+    private bool queueSpecial = false;
+    private int lastSpecialScore = -1;
+    private int lastSpecialIndex = -1;
+
+    private int blueTileCooldown = 0; // prevents blue spawning too often
 
     [Header("References")]
     public Transform Player;
     public Transform spawnStartPoint;
-    public Gamemanager gameManager; // Reference to your score script
+    public Gamemanager gameManager;
 
     private List<GameObject> activePaths = new List<GameObject>();
     private float spawnZ;
@@ -43,18 +47,13 @@ public class PathGenerator : MonoBehaviour
 
     void Update()
     {
-        // Check for score milestone
-        int currentScore = Mathf.FloorToInt(gameManager.score);
-        //if (currentScore > 0 && currentScore % scoreInterval == 0 && currentScore != lastSpecialScore)
-        //{
-        //    queueSpecial = true; // force next path to be special
-        //    lastSpecialScore = currentScore;
-        //}
-        if (currentScore == 350 || currentScore == 850 || currentScore == 1300)
+        // Check for yellow special milestone
+        int currentScore = gameManager.score;
+        if (currentScore == 350 || currentScore == 920 || currentScore == 1420)
         {
-            queueSpecial = true; // force next path to be special
-           // lastSpecialScore = currentScore;
+            queueSpecial = true;
         }
+
         // Spawn new path when player moves forward enough
         if (Player.position.z - safeZone > (spawnZ - initialSpawnCount * pathLength))
         {
@@ -69,18 +68,42 @@ public class PathGenerator : MonoBehaviour
 
         if (queueSpecial)
         {
-            // Always spawn the single special path
-            go = Instantiate(pathPrefabs[specialIndex1]);
-            lastSpecialIndex = specialIndex1;
+            // Spawn yellow special tile
+            go = Instantiate(pathPrefabs[yellowTileIndex]);
+            lastSpecialIndex = yellowTileIndex;
+            queueSpecial = false;
 
-            queueSpecial = false; // reset queue
+            // Yellow tile also progresses blue cooldown
+            if (blueTileCooldown > 0) blueTileCooldown--;
         }
         else
         {
-            // Normal path, excluding special one
-            int randIndex = Random.Range(0, pathPrefabs.Length);
-            while (randIndex == specialIndex1)
+            int randIndex;
+
+            if (blueTileCooldown > 0)
+            {
+                // Avoid spawning blue or yellow while cooldown active
                 randIndex = Random.Range(0, pathPrefabs.Length);
+                while (randIndex == yellowTileIndex || randIndex == blueTileIndex)
+                    randIndex = Random.Range(0, pathPrefabs.Length);
+
+                blueTileCooldown--;
+            }
+            else
+            {
+                // Chance to spawn blue tile
+                if (Random.value < blueTileChance)
+                {
+                    randIndex = blueTileIndex;
+                    blueTileCooldown = blueTileCooldownLength; // reset cooldown
+                }
+                else
+                {
+                    randIndex = Random.Range(0, pathPrefabs.Length);
+                    while (randIndex == yellowTileIndex || randIndex == blueTileIndex)
+                        randIndex = Random.Range(0, pathPrefabs.Length);
+                }
+            }
 
             go = Instantiate(pathPrefabs[randIndex]);
         }
@@ -90,7 +113,6 @@ public class PathGenerator : MonoBehaviour
         spawnZ += pathLength;
         activePaths.Add(go);
     }
-
 
     void DeleteOldPath()
     {

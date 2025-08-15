@@ -525,13 +525,14 @@ MonoBehaviour:
   - {fileID: 6272697048967957537, guid: a2ad5a50d505dfa4fbdc44b07d968896, type: 3}
   - {fileID: 6272697048967957537, guid: cd915217e9309b946b378da98e9a9513, type: 3}
   - {fileID: 6272697048967957537, guid: 5c78515fb841ee448af59c106a0b1bfd, type: 3}
-  - {fileID: 6272697048967957537, guid: 57f761c343956924d943d66f4e27dcde, type: 3}
   - {fileID: 6272697048967957537, guid: d113433d1bb64a049a6e402568f53e4e, type: 3}
+  - {fileID: 6272697048967957537, guid: 57f761c343956924d943d66f4e27dcde, type: 3}
   initialSpawnCount: 10
   pathLength: 50
-  specialIndex1: 7
-  specialIndex2: 8
-  scoreInterval: 350
+  blueTileIndex: 7
+  yellowTileIndex: 8
+  blueTileCooldownLength: 6
+  blueTileChance: 0.09
   Player: {fileID: 683000294}
   spawnStartPoint: {fileID: 774869722}
   gameManager: {fileID: 1868692185}
@@ -1069,8 +1070,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.021110535
-        value: 0.20588875
+        time: 0.015834808
+        value: 0.08235359
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1078,8 +1079,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.80211085
-        value: 0.06470589
+        time: 0.79681605
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
