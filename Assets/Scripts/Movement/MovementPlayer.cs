@@ -121,7 +121,7 @@ public class MovementPlayer : MonoBehaviour
                 Vector2 swipeDelta = touch.position - startTouchPos;
 
                 // Check horizontal swipe
-                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y) && Mathf.Abs(swipeDelta.x) > 50f) // threshold
+                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y) && Mathf.Abs(swipeDelta.x) > 20f) // threshold
                 {
                     if (swipeDelta.x > 0)
                         move += Vector3.right * sidewaysSpeed; // Swipe right

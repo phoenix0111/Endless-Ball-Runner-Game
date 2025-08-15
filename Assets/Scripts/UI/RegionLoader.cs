@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class RegionLoader : MonoBehaviour
 {
-    [Header("Essentrials")]
-    public int Coin;
+    [Header("Essentials")]
+    public int TotalCoins;
+    [SerializeField] TextMeshProUGUI coinsText;
 
 
     [Header(" Panels")]
@@ -20,34 +22,73 @@ public class RegionLoader : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] Button Region1Select;
     [SerializeField] Button Region2Select;
+    [SerializeField] Button Region2Buy;
 
 
     [Header("Shop Essentials")]
     [SerializeField] int CharacterIndex = 1;
+    [SerializeField] int CoinsToBuyChar2;
+    [SerializeField] Button BuyChar2;
+    [SerializeField] Button Char1;
+    [SerializeField] Button Char2;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         Region1Panel.SetActive(true);
         Region2Panel.SetActive(false);
         OutfitShopPanel.gameObject.SetActive(false);
 
-        Coin =   PlayerPrefs.GetInt("Coins");
-        Region2Select.interactable = false;
+        CoinSystem();
+
+
+
+        int RegionCheck = PlayerPrefs.GetInt("RegionIndex",1);
+        if (RegionCheck == 2)
+        {
+           
+            Destroy(Region2Buy.gameObject);
+            Destroy(Region2Lock);
+            Region2Select.interactable = true;
+
+        }
+
+        int OutfitCheck = PlayerPrefs.GetInt("OutfitIndex", 1);
+        if (OutfitCheck == 2)
+        {
+            Destroy(BuyChar2.gameObject);
+            Char2.interactable = true;
+
+        }
+    }
+
+  
+    void Update()
+    {
+        if (TotalCoins >= CoinsToBuyRegion2)
+        {
+            Region2Buy.interactable = true;
+        }
+
+        if (TotalCoins >= CoinsToBuyChar2)
+        {
+            BuyChar2.interactable = true;
+        }
 
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void CoinSystem()
     {
-        if (Coin >= CoinsToBuyRegion2)
-        {
-            Destroy(Region2Lock);
-            Region2Select.interactable = true;
-        }
+        TotalCoins = PlayerPrefs.GetInt("MenuCoins");
+        int Coin = PlayerPrefs.GetInt("GameCoins");
+        TotalCoins = TotalCoins + Coin;
+        Region2Select.interactable = false;
 
-        
+        coinsText.text = " Coins" + TotalCoins.ToString();
+
+        PlayerPrefs.SetInt("MenuCoins", TotalCoins);
+        PlayerPrefs.Save();
     }
 
     public void nextButton()
@@ -89,6 +130,7 @@ public class RegionLoader : MonoBehaviour
         CharacterIndex = 1;
         PlayerPrefs.SetInt("CharIndex", CharacterIndex);
         PlayerPrefs.Save();
+      
         OutfitShopClose();
 
     }
@@ -100,5 +142,44 @@ public class RegionLoader : MonoBehaviour
         PlayerPrefs.Save();
         OutfitShopClose();
 
+    }
+
+    public void BuyRegion2()
+    {
+        if (TotalCoins >= CoinsToBuyRegion2)
+        {
+            Destroy(Region2Lock);
+            Region2Select.interactable = true;
+            TotalCoins = TotalCoins - CoinsToBuyRegion2;
+            coinsText.text = " Coins" + TotalCoins.ToString();
+           PlayerPrefs.SetInt("MenuCoins", TotalCoins);
+           PlayerPrefs.Save();
+           
+            PlayerPrefs.SetInt("RegionIndex", 2);
+            PlayerPrefs.Save();
+            Destroy(Region2Buy.gameObject);
+        }
+
+        else Debug.Log("Not enough coins");
+    }
+
+    public void BuyCharacterSkin2()
+    {
+        if (TotalCoins >= CoinsToBuyChar2)
+        {
+
+            Char2.interactable = true;
+            TotalCoins = TotalCoins - CoinsToBuyChar2;
+            coinsText.text = " Coins" + TotalCoins.ToString();
+            PlayerPrefs.SetInt("MenuCoins", TotalCoins);
+            PlayerPrefs.Save();
+            Debug.Log("SKIN2 BOUGHT");
+
+            PlayerPrefs.SetInt("OutfitIndex", 2);
+            PlayerPrefs.Save();
+            Destroy(BuyChar2.gameObject);
+        }
+
+        else Debug.Log("Not enough coins");
     }
 }

@@ -42,7 +42,8 @@ public class Gamemanager : MonoBehaviour
 
     void Start()
     {
-        
+        PlayerPrefs.SetInt("GameCoins", 0);
+        PlayerPrefs.Save();
     }
 
    
@@ -96,9 +97,10 @@ public class Gamemanager : MonoBehaviour
 
     public  void IncreaseCoinCount()
     {
+       
         CoinCount++;
         uiManager.CoinText.text = "Coins: " + CoinCount.ToString();
-        PlayerPrefs.SetInt("Coins", CoinCount);
+        PlayerPrefs.SetInt("GameCoins", CoinCount);
         PlayerPrefs.Save();
     }
 
@@ -115,8 +117,9 @@ public class Gamemanager : MonoBehaviour
 
         CoinCount = CoinCount - uiManager.coinsneededtoRespawn;
         uiManager.coinsneededtoRespawn += 10;
+        uiManager.CoinText.text = "Coins: " + CoinCount.ToString();
 
-        PlayerPrefs.SetInt("Coins", CoinCount);
+        PlayerPrefs.SetInt("GameCoins", CoinCount);
         PlayerPrefs.Save();
     }
 }
