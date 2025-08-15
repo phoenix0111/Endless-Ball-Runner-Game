@@ -18,8 +18,7 @@ public class MovementPlayer : MonoBehaviour
     [Header("Jump Settings")]
     [SerializeField] bool isJumping = false;
     public float jumpForce = 10f;
-    public float hoverHeight = 1.1f;
-    public float hoverStrength = 20f;
+  
 
 
     void Start()
@@ -35,15 +34,20 @@ public class MovementPlayer : MonoBehaviour
         jump();
 
 
-        float difference = hoverHeight - transform.position.y;
-
-        // Only apply when on ground
-        if (!isJumping && difference > 0)
+        if (!isJumping)
         {
-            rb.AddForce(Vector3.up * difference * hoverStrength, ForceMode.Acceleration);
+            Vector3 pos = transform.position;
+            pos.y = Mathf.Lerp(pos.y, 1.1f, 10f); // smooth snap
+            transform.position = pos;
+            rb.useGravity = false;
         }
 
+        else
+        {
+            rb.useGravity = true;
+        }
 
+        Debug.Log("max speed" + forwardSpeed + "max side speed" + sidewaysSpeed);
     }
 
     void movement()
@@ -66,8 +70,7 @@ public class MovementPlayer : MonoBehaviour
 
         rb.linearVelocity = velocity;
 
-       // Vector3 move = Vector3.forward * forwardSpeed * Time.deltaTime;
-        //transform.Translate(move, Space.World);
+      
 
     }
 

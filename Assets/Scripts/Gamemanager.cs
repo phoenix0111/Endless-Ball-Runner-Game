@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Splines.Interpolators;
 
 public class Gamemanager : MonoBehaviour
 {
     [Header("Essentials")]
     [SerializeField] uiManager uiManager; 
     [SerializeField] MovementPlayer Player;
+    [SerializeField] Camera Camera;
    
     [Header("Score")]
     public int score = 0;
@@ -13,8 +15,12 @@ public class Gamemanager : MonoBehaviour
 
     [Header("DifficultySettings")]
     [SerializeField] int ScoreThreshold = 100;
-    [SerializeField] float ScoreMultiplyerRate = 2;
+    [SerializeField] float ScoreMultiplyerRate = 1.2f;
+    [SerializeField] float ScoreCap = 50;
 
+    [Header("Camera Settings")]
+    [SerializeField] int FOVIncreaser = 5;
+    private int cameraFOVvalue;
     void Start()
     {
         
@@ -26,12 +32,19 @@ public class Gamemanager : MonoBehaviour
         ScoreCalculate();
 
 
-
-        if (score >= ScoreThreshold)
+        if (Player.forwardSpeed <= ScoreCap)
         {
-            increaseDifficulty();
-            ScoreThreshold += 100; // Set next threshold (200, 300, etc.)
+            if (score >= ScoreThreshold)
+            {
+                increaseDifficulty();
+                ScoreThreshold += 100; // Set next threshold (200, 300, etc.)
+                cameraFOVvalue = ((int)Camera.fieldOfView)+ FOVIncreaser ;
+                Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, cameraFOVvalue, 2);
+             }
+
         }
+
+         
     }
 
     void ScoreCalculate()
@@ -45,10 +58,12 @@ public class Gamemanager : MonoBehaviour
 
     void increaseDifficulty()
     {
+        {
+            Player.forwardSpeed *= ScoreMultiplyerRate; // Increase player's base speed
+            Player.sidewaysSpeed *= ScoreMultiplyerRate;
+        }
 
-        Player.forwardSpeed *= ScoreMultiplyerRate; // Increase player's base speed
-        Player.sidewaysSpeed *= ScoreMultiplyerRate;
-        
+
 
     }
 }
