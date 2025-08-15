@@ -17,11 +17,11 @@ public class PathGenerator : MonoBehaviour
     public float blueTileChance = 0.1f; // 10% chance when allowed
 
     private bool queueSpecial = false;
-    private int lastSpecialScore = -1;
+  
     private int lastSpecialIndex = -1;
 
     private int blueTileCooldown = 0; // prevents blue spawning too often
-
+    private bool firstnobluetile = false; 
     [Header("References")]
     public Transform Player;
     public Transform spawnStartPoint;
@@ -95,7 +95,7 @@ public class PathGenerator : MonoBehaviour
             else
             {
                 // Chance to spawn blue tile
-                if (Random.value < blueTileChance)
+                if (Random.value < blueTileChance && firstnobluetile)
                 {
                     randIndex = blueTileIndex;
                     blueTileCooldown = blueTileCooldownLength; // reset cooldown
@@ -109,6 +109,7 @@ public class PathGenerator : MonoBehaviour
             }
 
             go = Instantiate(pathPrefabs[randIndex]);
+            firstnobluetile = true;
         }
 
         go.transform.SetParent(transform);

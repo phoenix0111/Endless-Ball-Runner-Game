@@ -41,7 +41,7 @@ public class uiManager : MonoBehaviour
     public void PlayGame()
     {
         Time.timeScale = 1; // Ensure the game is running at normal speed
-        SceneManager.LoadScene("GameScene"); // Load the game scene
+        SceneManager.LoadScene("MainMenu"); // Load the game scene
     }
 
     public void pausegame()
@@ -78,8 +78,8 @@ public class uiManager : MonoBehaviour
 
     public void OnPlayerDead()
     {
-        int coin;
-        coin = gameManager.CoinCount;
+        int coin = PlayerPrefs.GetInt("Coins");
+        
 
         if (coin >= coinsneededtoRespawn) Respawnmenu.SetActive(true);
 

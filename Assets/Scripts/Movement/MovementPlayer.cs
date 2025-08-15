@@ -161,8 +161,7 @@ public class MovementPlayer : MonoBehaviour
       
         if(collision.gameObject.tag == "Obstacle")
         {
-            forwardSpeed = 0f;
-            sidewaysSpeed = 0f;
+           rb.linearVelocity = Vector3.zero;
             uiManager.OnPlayerDead();
             gameObject.SetActive(false);
         }

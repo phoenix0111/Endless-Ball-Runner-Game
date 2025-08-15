@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] int nextScoreThreshold = 100; // Initial threshold for difficulty increase    
     [SerializeField] int SpeedIncreaseRate = 1; // How much to increase speed each time
 
+
     [Header("Game Restart")]
     public Vector3 Restartpos;
     [SerializeField] GameObject BallPlayer;
+    
 
     public UnityEvent OnGameOver;
 
@@ -109,6 +111,7 @@ public class GameManager : MonoBehaviour
     {
 
         player.baseSpeed += SpeedIncreaseRate; // Increase player's base speed
+        
         player.boostSpeed += SpeedIncreaseRate; // Increase player's boost speed
        
     }
