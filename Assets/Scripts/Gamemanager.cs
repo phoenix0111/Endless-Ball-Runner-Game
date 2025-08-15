@@ -7,11 +7,16 @@ public class Gamemanager : MonoBehaviour
     [SerializeField] uiManager uiManager; 
     [SerializeField] MovementPlayer Player;
     [SerializeField] Camera Camera;
+    public GameObject player;
+
    
     [Header("Score")]
     public int score = 0;
     private float Fscore = 0f;
     [SerializeField] float scoreMultiplier = 1f;
+
+    [Header("Coins")]
+    public int CoinCount = 0;
 
     [Header("DifficultySettings")]
     [SerializeField] int ScoreThreshold = 100;
@@ -21,6 +26,14 @@ public class Gamemanager : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] int FOVIncreaser = 5;
     private int cameraFOVvalue;
+
+    [Header("Respawning")]
+    public Vector3 RespawnPos;
+
+
+
+
+
     void Start()
     {
         
@@ -64,6 +77,25 @@ public class Gamemanager : MonoBehaviour
         }
 
 
+
+    }
+
+    public  void IncreaseCoinCount()
+    {
+        CoinCount++;
+        uiManager.CoinText.text = "Coins: " + CoinCount.ToString();
+    }
+
+    public void RespawnGame()
+    {
+       player.transform.position = RespawnPos; // Reset player position
+       player.SetActive(true);
+       
+       uiManager.Allpaneldisable(); // Disable all panels
+        uiManager.scoreText.gameObject.SetActive(true);
+
+        CoinCount = CoinCount - uiManager.coinsneededtoRespawn;
+        uiManager.coinsneededtoRespawn += 10; ;
 
     }
 }

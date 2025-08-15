@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 
 public class MovementPlayer : MonoBehaviour
 {
     [Header("Essentials")]
     [SerializeField] bool isMobile;
+    [SerializeField] Gamemanager gamemanager;
+    [SerializeField] CoinSpawner coinSpawner;
 
     [Header("Movement Settings")]
     public float forwardSpeed = 15f;   
@@ -154,5 +157,25 @@ public class MovementPlayer : MonoBehaviour
             isJumping = false;
 
       
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Coin")
+        {
+           
+            gamemanager.IncreaseCoinCount();
+                coinSpawner.ReturnCoin(other.gameObject);
+           
+        }
+
+        if (other.gameObject.tag == "checkpoint")
+        {
+
+            gamemanager.RespawnPos= other.gameObject.transform.position;
+            Debug.Log("respawn point" + gamemanager.RespawnPos);
+           
+
+        }
     }
 }
