@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("Essentials")]
      [SerializeField] GameManager gameManager;
-     [SerializeField] InputActions PlayerInputManager;
+   //  [SerializeField] InputActions PlayerInputManager;
      [SerializeField] private string gameSceneName = "Final_Game";
      public Slider SpeedShowcaseSlider; // Slider for volume controlSpped
     [SerializeField] ballMove player; // Reference to the player script for speed control

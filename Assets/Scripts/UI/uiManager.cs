@@ -15,6 +15,12 @@ public class uiManager : MonoBehaviour
     [SerializeField] GameObject Pausemenu;
     [SerializeField] GameObject Respawnmenu;
     [SerializeField] GameObject GameOvermenu;
+    [SerializeField] TextMeshProUGUI GameoverScore;
+    [SerializeField] TextMeshProUGUI GameoverCoin;
+    [SerializeField] TextMeshProUGUI RespawnPanelCoinText;
+
+
+
 
     [Header("Respawn mechanic")]
     public int coinsneededtoRespawn;
@@ -41,7 +47,7 @@ public class uiManager : MonoBehaviour
     public void PlayGame()
     {
         Time.timeScale = 1; // Ensure the game is running at normal speed
-        SceneManager.LoadScene("GameScene"); // Load the game scene
+        SceneManager.LoadScene("MainMenu"); // Load the game scene
     }
 
     public void pausegame()
@@ -72,21 +78,30 @@ public class uiManager : MonoBehaviour
     public void LoadMainMenu()
     {
         Time.timeScale = 1;
+
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
+
     }
 
 
     public void OnPlayerDead()
     {
-        int coin;
-        coin = gameManager.CoinCount;
+        int coin = gameManager.CoinCount;
 
-        if (coin >= coinsneededtoRespawn) Respawnmenu.SetActive(true);
 
+        if (coin >= coinsneededtoRespawn)
+        {
+            Respawnmenu.SetActive(true);
+
+            RespawnPanelCoinText.text = "Coins Need To Respawn: " + coinsneededtoRespawn;
+        }
         else
         {
             Respawnmenu.SetActive(false);
             GameOvermenu.SetActive(true);
+
+            GameoverCoin.text = "Coin: " + gameManager.CoinCount.ToString();
+            GameoverScore.text = "Score: " + gameManager.score.ToString();
         }
 
         scoreText.gameObject.SetActive(false);

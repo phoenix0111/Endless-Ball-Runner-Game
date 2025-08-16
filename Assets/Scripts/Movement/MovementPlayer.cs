@@ -9,6 +9,8 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] Gamemanager gamemanager;
     [SerializeField] CoinSpawner coinSpawner;
     [SerializeField] uiManager uiManager;
+    public GameObject Player1Skin;
+    public GameObject Player2Skin;
     
 
     [Header("Movement Settings")]
@@ -28,6 +30,12 @@ public class MovementPlayer : MonoBehaviour
 
     void Start()
     {
+        int playerIndexChoose = PlayerPrefs.GetInt("CharIndex", 1);
+
+        if (playerIndexChoose == 1) Player1Skin.SetActive(true); Player2Skin.SetActive(false);
+
+        if (playerIndexChoose == 2) Player1Skin.SetActive(false); Player2Skin.SetActive(true);
+
         rb = GetComponent<Rigidbody>();
        
         isMobile = Application.platform == RuntimePlatform.Android ;
@@ -113,7 +121,7 @@ public class MovementPlayer : MonoBehaviour
                 Vector2 swipeDelta = touch.position - startTouchPos;
 
                 // Check horizontal swipe
-                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y) && Mathf.Abs(swipeDelta.x) > 50f) // threshold
+                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y) && Mathf.Abs(swipeDelta.x) > 20f) // threshold
                 {
                     if (swipeDelta.x > 0)
                         move += Vector3.right * sidewaysSpeed; // Swipe right
@@ -161,8 +169,7 @@ public class MovementPlayer : MonoBehaviour
       
         if(collision.gameObject.tag == "Obstacle")
         {
-            forwardSpeed = 0f;
-            sidewaysSpeed = 0f;
+           rb.linearVelocity = Vector3.zero;
             uiManager.OnPlayerDead();
             gameObject.SetActive(false);
         }

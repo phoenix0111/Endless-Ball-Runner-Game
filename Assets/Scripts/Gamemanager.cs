@@ -1,12 +1,15 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Splines.Interpolators;
+
 
 public class Gamemanager : MonoBehaviour
 {
     [Header("Essentials")]
     [SerializeField] uiManager uiManager; 
     [SerializeField] MovementPlayer Player;
-    [SerializeField] Camera Camera;
+    
+    [SerializeField] CinemachineCamera cinecamera;
     public GameObject player;
 
    
@@ -25,10 +28,13 @@ public class Gamemanager : MonoBehaviour
 
     [Header("Camera Settings")]
     [SerializeField] int FOVIncreaser = 5;
-    private int cameraFOVvalue;
+    private int cameraFOVvalue = 40;
+    [SerializeField] float fovSmoothSpeed = 5;
 
     [Header("Respawning")]
     public Vector3 RespawnPos;
+    private float currentspeed;
+    private float currentsidespeed;
 
 
 
@@ -36,7 +42,8 @@ public class Gamemanager : MonoBehaviour
 
     void Start()
     {
-        
+        PlayerPrefs.SetInt("GameCoins", 0);
+        PlayerPrefs.Save();
     }
 
    
@@ -51,13 +58,19 @@ public class Gamemanager : MonoBehaviour
             {
                 increaseDifficulty();
                 ScoreThreshold += 100; // Set next threshold (200, 300, etc.)
-                cameraFOVvalue = ((int)Camera.fieldOfView)+ FOVIncreaser ;
-                Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, cameraFOVvalue, 2);
+                cameraFOVvalue = ((int)cinecamera.Lens.FieldOfView) + FOVIncreaser ;
+               
+
+
+
              }
 
         }
+        cinecamera.Lens.FieldOfView = Mathf.Lerp(cinecamera.Lens.FieldOfView, cameraFOVvalue, Time.deltaTime * fovSmoothSpeed);
 
-         
+        currentspeed = Player.forwardSpeed;
+      
+        currentsidespeed = Player.sidewaysSpeed;
     }
 
     void ScoreCalculate()
@@ -73,7 +86,9 @@ public class Gamemanager : MonoBehaviour
     {
         {
             Player.forwardSpeed *= ScoreMultiplyerRate; // Increase player's base speed
+            currentspeed = Player.forwardSpeed;
             Player.sidewaysSpeed *= ScoreMultiplyerRate;
+            currentsidespeed = Player.sidewaysSpeed;
         }
 
 
@@ -82,20 +97,29 @@ public class Gamemanager : MonoBehaviour
 
     public  void IncreaseCoinCount()
     {
+       
         CoinCount++;
         uiManager.CoinText.text = "Coins: " + CoinCount.ToString();
+        PlayerPrefs.SetInt("GameCoins", CoinCount);
+        PlayerPrefs.Save();
     }
 
     public void RespawnGame()
     {
        player.transform.position = RespawnPos; // Reset player position
+        Player.forwardSpeed = currentspeed;
+        Player.sidewaysSpeed = currentsidespeed;
        player.SetActive(true);
        
        uiManager.Allpaneldisable(); // Disable all panels
         uiManager.scoreText.gameObject.SetActive(true);
+        uiManager.CoinText.gameObject.SetActive(true);
 
         CoinCount = CoinCount - uiManager.coinsneededtoRespawn;
-        uiManager.coinsneededtoRespawn += 10; ;
+        uiManager.coinsneededtoRespawn += 10;
+        uiManager.CoinText.text = "Coins: " + CoinCount.ToString();
 
+        PlayerPrefs.SetInt("GameCoins", CoinCount);
+        PlayerPrefs.Save();
     }
 }

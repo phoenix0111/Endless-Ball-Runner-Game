@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [Header("Movement")]
-     [SerializeField] SwipeController swipeController;
+   //  [SerializeField] SwipeController swipeController;
      [SerializeField] ballMove player;
 
 
@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] int nextScoreThreshold = 100; // Initial threshold for difficulty increase    
     [SerializeField] int SpeedIncreaseRate = 1; // How much to increase speed each time
 
+
     [Header("Game Restart")]
     public Vector3 Restartpos;
     [SerializeField] GameObject BallPlayer;
+    
 
     public UnityEvent OnGameOver;
 
@@ -34,10 +36,7 @@ public class GameManager : MonoBehaviour
     {
         ServiceLocator.ForSceneOf(this).Register<GameManager>(this);
 
-        swipeController = GetComponent<SwipeController>();
-        swipeController.OnSwipeLeft += player.MoveLeft;
-        swipeController.OnSwipeRight += player.MoveRight;
-
+       
 
 
         OnGameOver.AddListener(SetGameOverStateToTrue);
@@ -109,6 +108,7 @@ public class GameManager : MonoBehaviour
     {
 
         player.baseSpeed += SpeedIncreaseRate; // Increase player's base speed
+        
         player.boostSpeed += SpeedIncreaseRate; // Increase player's boost speed
        
     }
