@@ -9,7 +9,7 @@ public class MovementPlayer : MonoBehaviour
     [Header("Essentials")]
     [SerializeField] bool isMobile;
     [SerializeField] Gamemanager gamemanager;
-    [SerializeField] CoinSpawner coinSpawner;
+  
     [SerializeField] uiManager uiManager;
     public GameObject Player1Skin;
     public GameObject Player2Skin;
@@ -213,7 +213,7 @@ public class MovementPlayer : MonoBehaviour
         {
 
             gamemanager.IncreaseCoinCount();
-            coinSpawner.ReturnCoin(other.gameObject);
+            CoinsObjectPool.Instance.ReturnCoin(other.gameObject);
 
         }
 

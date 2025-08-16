@@ -1,60 +1,57 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
 public class CoinSpawner : MonoBehaviour
 {
-    public GameObject coinPrefab;
-    public int poolSize = 30;
-    public CoinPattern[] patterns;
+    [SerializeField] Transform[] SpawnStraightPoints;
+    [SerializeField] Transform[] CurveSpawnPoint;
+    
+   
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private Queue<GameObject> coinPool = new Queue<GameObject>();
-
-    void Awake()
+    void Start()
     {
-        for (int i = 0; i < poolSize; i++)
+        
+        for (int i = 0; i < SpawnStraightPoints.Length; i++)
         {
-            GameObject coin = Instantiate(coinPrefab);
-            coin.SetActive(false);
-            coinPool.Enqueue(coin);
+            SpawnStraightPoints[i].transform.position = new Vector3(Random.Range(-2,2), SpawnStraightPoints[i].transform.position.y, SpawnStraightPoints[i].transform.position.z);
         }
+
+        
+
+
+        SpawnStraightCoins();
+        SpawnCurvedCoins();
     }
 
-    public void SpawnCoinsOnPath(Transform path)
+    // Update is called once per frame
+    void Update()
     {
-        // Pick a random pattern
-        if (patterns.Length == 0) return;
-        CoinPattern pattern = patterns[Random.Range(0, patterns.Length)];
-
-        foreach (Vector3 localPos in pattern.positions)
-        {
-            GameObject coin = GetCoinFromPool();
-            coin.transform.SetParent(path);
-            coin.transform.localPosition = localPos;
-            coin.transform.localRotation = Quaternion.identity;
-            
-            coin.SetActive(true);
-        }
-       
+        
     }
 
-    private GameObject GetCoinFromPool()
+    void SpawnStraightCoins()
     {
-        if (coinPool.Count > 0)
+        if (SpawnStraightPoints.Length < 2) return; // need at least 2 spawn points
+
+        // pick first random point
+        Transform firstPoint = SpawnStraightPoints[Random.Range(0, SpawnStraightPoints.Length)];
+        CoinsObjectPool.Instance.SpawnStraightCoinsOnPath(firstPoint);
+
+        // pick second random point different from first
+        Transform secondPoint;
+        do
         {
-            GameObject coin = coinPool.Dequeue();
-            return coin;
-        }
-        else
-        {
-            // if pool is empty, create new
-            return Instantiate(coinPrefab);
-        }
+            secondPoint = SpawnStraightPoints[Random.Range(0, SpawnStraightPoints.Length)];
+        } while (secondPoint == firstPoint);
+
+        CoinsObjectPool.Instance.SpawnStraightCoinsOnPath(secondPoint);
     }
 
-    public void ReturnCoin(GameObject coin)
+    void SpawnCurvedCoins()
     {
-        coin.SetActive(false);
-        coinPool.Enqueue(coin);
+        // pick first random point
+        Transform CurvePoint = CurveSpawnPoint[Random.Range(0, CurveSpawnPoint.Length)];
+        CoinsObjectPool.Instance.SpawnCurvedCoinsOnPath(CurvePoint);
     }
 }

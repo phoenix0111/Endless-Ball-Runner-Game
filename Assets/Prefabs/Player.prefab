@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 260861095288644591}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,14 +333,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMobile: 0
   gamemanager: {fileID: 0}
-  coinSpawner: {fileID: 0}
   uiManager: {fileID: 0}
   Player1Skin: {fileID: 1799795588781514609}
   Player2Skin: {fileID: 2603027349670964220}
   Cinecam: {fileID: 0}
   forwardSpeed: 15
   sidewaysSpeed: 10
-  maxX: 1.6
+  maxX: 2
   isJumping: 0
   jumpForce: 6
   SpecialspeedMultiplier: 1.05

@@ -26,7 +26,7 @@ public class PathGenerator : MonoBehaviour
     public Transform Player;
     public Transform spawnStartPoint;
     public Gamemanager gameManager;
-    public CoinSpawner coinSpawner;
+    //   public CoinsObjectPool CoinPool;
 
     private List<GameObject> activePaths = new List<GameObject>();
     private float spawnZ;
@@ -116,9 +116,9 @@ public class PathGenerator : MonoBehaviour
         go.transform.position = new Vector3(0, 0, spawnZ);
         spawnZ += pathLength;
         activePaths.Add(go);
-         
-     //   if (coinSpawner != null)                                     // for coin
-       //     coinSpawner.SpawnCoinsOnPath(go.transform);     // for coin
+
+        //   if (CoinPool != null)                                     // for coin
+        //     CoinPool.SpawnCoinsOnPath(go.transform);     // for coin
     }
 
     void DeleteOldPath()
