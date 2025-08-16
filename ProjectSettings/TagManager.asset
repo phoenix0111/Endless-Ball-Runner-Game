@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Speed
   - Speed_Destructor
+  - Cleaner
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Post_processing
   - 
   - Ground
-  - 
+  - Cleaner
   - 
   - 
   - 

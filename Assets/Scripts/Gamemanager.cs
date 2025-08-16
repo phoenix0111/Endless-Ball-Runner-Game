@@ -11,6 +11,7 @@ public class Gamemanager : MonoBehaviour
     
     [SerializeField] CinemachineCamera cinecamera;
     public GameObject player;
+    [SerializeField] GameObject SpeedLines;
 
    
     [Header("Score")]
@@ -50,6 +51,8 @@ public class Gamemanager : MonoBehaviour
     void Update()
     {
         ScoreCalculate();
+
+        if (score >= 500) SpeedLines.SetActive(true);
 
 
         if (Player.forwardSpeed <= ScoreCap)

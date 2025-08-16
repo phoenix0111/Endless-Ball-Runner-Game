@@ -50,7 +50,8 @@ public class CoinSpawner : MonoBehaviour
 
     void SpawnCurvedCoins()
     {
-        // pick first random point
+        if (CurveSpawnPoint.Length == 0) return;
+        
         Transform CurvePoint = CurveSpawnPoint[Random.Range(0, CurveSpawnPoint.Length)];
         CoinsObjectPool.Instance.SpawnCurvedCoinsOnPath(CurvePoint);
     }

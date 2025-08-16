@@ -37,8 +37,12 @@ public class CoinsObjectPool : MonoBehaviour
         if (patterns.Length == 0) return;
         CoinPattern pattern = patterns[1]; // straight
 
+        
+
         foreach (Vector3 localPos in pattern.positions)
         {
+           
+
             GameObject coin = GetCoinFromPool();
             coin.transform.SetParent(path);
             coin.transform.localPosition = localPos;
@@ -78,5 +82,6 @@ public class CoinsObjectPool : MonoBehaviour
     {
         coin.SetActive(false);
         coinPool.Enqueue(coin);
+        coin.transform.parent = null;
     }
 }

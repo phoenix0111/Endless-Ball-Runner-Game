@@ -13,4 +13,6 @@ public class CoinGameObject : MonoBehaviour
     {
         transform.Rotate(Vector3.up, 100 * Time.deltaTime, Space.World);
     }
+
+    
 }

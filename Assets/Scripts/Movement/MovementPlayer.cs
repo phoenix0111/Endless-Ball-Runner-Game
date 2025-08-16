@@ -70,7 +70,9 @@ public class MovementPlayer : MonoBehaviour
             rb.useGravity = true;
         }
 
-        Debug.Log("max speed" + forwardSpeed + "max side speed" + sidewaysSpeed);
+        // Debug.Log("max speed" + forwardSpeed + "max side speed" + sidewaysSpeed);
+
+  
     }
 
     void movement()
