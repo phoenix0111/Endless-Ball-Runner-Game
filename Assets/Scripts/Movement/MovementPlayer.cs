@@ -202,7 +202,11 @@ public class MovementPlayer : MonoBehaviour
 
         else if (collision.gameObject.tag == "Obstacle" && WillDestroyObject)
         {
-            Debug.Log("Desrtoy obstacle");
+           
+            Cinecam.AmplitudeGain = 1;
+
+
+            Invoke("CameraSkaeoff", 0.5f);
             Destroy(collision.gameObject);
         }
     }
@@ -221,7 +225,7 @@ public class MovementPlayer : MonoBehaviour
         {
 
             gamemanager.RespawnPos = other.gameObject.transform.position;
-            Debug.Log("respawn point" + gamemanager.RespawnPos);
+            
 
 
         }
@@ -234,7 +238,7 @@ public class MovementPlayer : MonoBehaviour
 
             forwardSpeed = forwardSpeed + SpecialspeedMultiplier;
 
-            Debug.Log("changed to speedy");
+           
 
             isSpeedPath = true;
 

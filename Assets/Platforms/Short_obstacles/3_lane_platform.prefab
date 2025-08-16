@@ -182,7 +182,6 @@ MonoBehaviour:
   - {fileID: 9203685598985499624}
   - {fileID: 2091963828350067134}
   - {fileID: 6681091764502828023}
-  CoinPool: {fileID: 0}
 --- !u!1 &6094748010401612664
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8628374556258966393, guid: aac2abd87e03eae439cfcfbb25458787, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 8628374556258966393, guid: aac2abd87e03eae439cfcfbb25458787, type: 3}
       propertyPath: m_LocalPosition.y
@@ -546,7 +545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8528310218163378228, guid: 42d62d5fa1591b74b8caa82b569bd98e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 8528310218163378228, guid: 42d62d5fa1591b74b8caa82b569bd98e, type: 3}
       propertyPath: m_LocalPosition.y
