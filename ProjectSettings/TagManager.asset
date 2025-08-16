@@ -7,6 +7,8 @@ TagManager:
   - Coin
   - checkpoint
   - Obstacle
+  - Speed
+  - Speed_Destructor
   layers:
   - Default
   - TransparentFX

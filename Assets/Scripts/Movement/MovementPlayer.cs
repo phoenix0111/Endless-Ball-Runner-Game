@@ -14,22 +14,27 @@ public class MovementPlayer : MonoBehaviour
     public GameObject Player1Skin;
     public GameObject Player2Skin;
     [SerializeField] CinemachineBasicMultiChannelPerlin Cinecam;
-    
+
 
     [Header("Movement Settings")]
-    public float forwardSpeed = 15f;   
-    public float sidewaysSpeed = 10f;  
+    public float forwardSpeed = 15f;
+    public float sidewaysSpeed = 10f;
     private Rigidbody rb;
     Vector2 startTouchPos;
     bool isSwiping = false;
     [SerializeField] float maxX = 1.6f;
-    
+
 
     [Header("Jump Settings")]
     [SerializeField] bool isJumping = false;
     public float jumpForce = 10f;
-  
 
+    [Header("SpeedPath")]
+    float currentspeed;
+    [SerializeField] float SpecialspeedMultiplier = 2;
+    [SerializeField] float BackToNormalDelay = 5f;
+    [SerializeField] bool WillDestroyObject = false;
+    private bool isSpeedPath= false;
 
     void Start()
     {
@@ -40,8 +45,10 @@ public class MovementPlayer : MonoBehaviour
         if (playerIndexChoose == 2) Player1Skin.SetActive(false); Player2Skin.SetActive(true);
 
         rb = GetComponent<Rigidbody>();
+
+        isMobile = Application.platform == RuntimePlatform.Android;
+
        
-        isMobile = Application.platform == RuntimePlatform.Android ;
     }
 
     void FixedUpdate()
@@ -70,7 +77,7 @@ public class MovementPlayer : MonoBehaviour
     {
 
         // Always move forward
-        Vector3 velocity = new Vector3(0, rb.linearVelocity.y,forwardSpeed);
+        Vector3 velocity = new Vector3(0, rb.linearVelocity.y, forwardSpeed);
 
         Vector3 moveInput = isMobile ? HandleMobileInput() : HandlePCMouseInput();
 
@@ -86,7 +93,7 @@ public class MovementPlayer : MonoBehaviour
 
         rb.linearVelocity = velocity;
 
-      
+
 
     }
 
@@ -98,16 +105,16 @@ public class MovementPlayer : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return move;
 
-        if (Input.GetMouseButton(0)) 
+        if (Input.GetMouseButton(0))
             move += Vector3.left * sidewaysSpeed;
 
-        if (Input.GetMouseButton(1)) 
+        if (Input.GetMouseButton(1))
             move += Vector3.right * sidewaysSpeed;
 
         return move;
     }
 
-   
+
 
     Vector3 HandleMobileInput()
     {
@@ -151,7 +158,7 @@ public class MovementPlayer : MonoBehaviour
 
     void jump()
     {
-        
+
 
         if (Input.GetKey(KeyCode.Space) && !isJumping)
         {
@@ -168,7 +175,7 @@ public class MovementPlayer : MonoBehaviour
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true; // Set jumping state to true
-            
+
         }
     }
 
@@ -179,38 +186,69 @@ public class MovementPlayer : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             isJumping = false;
 
-      
-        if(collision.gameObject.tag == "Obstacle")
+
+        if (collision.gameObject.tag == "Obstacle" && !WillDestroyObject)
         {
-           Cinecam.AmplitudeGain = 1;
-           rb.linearVelocity = Vector3.zero;
-           uiManager.OnPlayerDead();
-           
+            Cinecam.AmplitudeGain = 1;
+            rb.linearVelocity = Vector3.zero;
+            uiManager.OnPlayerDead();
+
             gameObject.SetActive(false);
 
             Invoke("CameraSkaeoff", 0.5f);
             uiManager.OnPlayerDead();
 
         }
+
+        else if (collision.gameObject.tag == "Obstacle" && WillDestroyObject)
+        {
+            Debug.Log("Desrtoy obstacle");
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Coin")
+        if (other.gameObject.tag == "Coin")
         {
-           
+
             gamemanager.IncreaseCoinCount();
-                coinSpawner.ReturnCoin(other.gameObject);
-           
+            coinSpawner.ReturnCoin(other.gameObject);
+
         }
 
         if (other.gameObject.tag == "checkpoint")
         {
 
-            gamemanager.RespawnPos= other.gameObject.transform.position;
+            gamemanager.RespawnPos = other.gameObject.transform.position;
             Debug.Log("respawn point" + gamemanager.RespawnPos);
-           
 
+
+        }
+
+        if (other.gameObject.tag == "Speed" && !isSpeedPath)
+        {
+            WillDestroyObject = true;
+           
+            currentspeed = forwardSpeed;
+
+            forwardSpeed = forwardSpeed + SpecialspeedMultiplier;
+
+            Debug.Log("changed to speedy");
+
+            isSpeedPath = true;
+
+        }
+    }
+
+    
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Speed")
+        {
+            isSpeedPath = false;
+            Invoke("BackToNormal", BackToNormalDelay);
         }
     }
 
@@ -219,4 +257,11 @@ public class MovementPlayer : MonoBehaviour
         Cinecam.AmplitudeGain = 0;
     }
 
+    void BackToNormal()
+    {
+        Debug.Log("back to normal");
+        forwardSpeed = currentspeed;
+        
+        WillDestroyObject = false;
+    }
 }
