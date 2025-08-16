@@ -1,5 +1,7 @@
-﻿using Unity.VisualScripting;
+﻿using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 public class MovementPlayer : MonoBehaviour
@@ -11,6 +13,7 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] uiManager uiManager;
     public GameObject Player1Skin;
     public GameObject Player2Skin;
+    [SerializeField] CinemachineBasicMultiChannelPerlin Cinecam;
     
 
     [Header("Movement Settings")]
@@ -92,6 +95,9 @@ public class MovementPlayer : MonoBehaviour
     {
         Vector3 move = Vector3.zero;
 
+        if (EventSystem.current.IsPointerOverGameObject())
+            return move;
+
         if (Input.GetMouseButton(0)) 
             move += Vector3.left * sidewaysSpeed;
 
@@ -110,9 +116,11 @@ public class MovementPlayer : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                return move;
             if (touch.phase == TouchPhase.Began)
             {
+
                 startTouchPos = touch.position;
                 isSwiping = true;
             }
@@ -143,16 +151,21 @@ public class MovementPlayer : MonoBehaviour
 
     void jump()
     {
+        
 
         if (Input.GetKey(KeyCode.Space) && !isJumping)
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true; // Set jumping state to true
         }
 
         if (Input.GetMouseButton(0) && isMobile && !isJumping)
         {
-           
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true; // Set jumping state to true
             
@@ -169,9 +182,15 @@ public class MovementPlayer : MonoBehaviour
       
         if(collision.gameObject.tag == "Obstacle")
         {
+           Cinecam.AmplitudeGain = 1;
            rb.linearVelocity = Vector3.zero;
-            uiManager.OnPlayerDead();
+           uiManager.OnPlayerDead();
+           
             gameObject.SetActive(false);
+
+            Invoke("CameraSkaeoff", 0.5f);
+            uiManager.OnPlayerDead();
+
         }
     }
 
@@ -194,4 +213,10 @@ public class MovementPlayer : MonoBehaviour
 
         }
     }
+
+    void CameraSkaeoff()
+    {
+        Cinecam.AmplitudeGain = 0;
+    }
+
 }

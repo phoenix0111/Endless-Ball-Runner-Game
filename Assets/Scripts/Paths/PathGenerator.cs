@@ -117,8 +117,8 @@ public class PathGenerator : MonoBehaviour
         spawnZ += pathLength;
         activePaths.Add(go);
          
-        if (coinSpawner != null)                                     // for coin
-            coinSpawner.SpawnCoinsOnPath(go.transform);     // for coin
+     //   if (coinSpawner != null)                                     // for coin
+       //     coinSpawner.SpawnCoinsOnPath(go.transform);     // for coin
     }
 
     void DeleteOldPath()
