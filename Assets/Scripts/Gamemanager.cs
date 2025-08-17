@@ -38,7 +38,10 @@ public class Gamemanager : MonoBehaviour
     private float currentsidespeed;
 
 
-
+    private void Awake()
+    {
+        CoinsObjectPool.Instance.InitializePool();
+    }
 
 
     void Start()
@@ -74,6 +77,8 @@ public class Gamemanager : MonoBehaviour
         currentspeed = Player.forwardSpeed;
       
         currentsidespeed = Player.sidewaysSpeed;
+
+        Debug.Log("resapewn"+ RespawnPos);
     }
 
     void ScoreCalculate()
@@ -102,7 +107,7 @@ public class Gamemanager : MonoBehaviour
     {
        
         CoinCount++;
-        uiManager.CoinText.text = "Coins: " + CoinCount.ToString();
+        uiManager.CoinText.text =  CoinCount.ToString();
         PlayerPrefs.SetInt("GameCoins", CoinCount);
         PlayerPrefs.Save();
     }

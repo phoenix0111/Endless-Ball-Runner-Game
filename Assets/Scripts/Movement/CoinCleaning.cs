@@ -23,7 +23,7 @@ public class CoinCleaning : MonoBehaviour
         {
             // Just return coin to pool, no score
             CoinsObjectPool.Instance.ReturnCoin(other.gameObject);
-            Debug.Log("fere");
+           
         }
     }
 

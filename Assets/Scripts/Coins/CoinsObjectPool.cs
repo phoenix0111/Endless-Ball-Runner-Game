@@ -24,6 +24,12 @@ public class CoinsObjectPool : MonoBehaviour
         DontDestroyOnLoad(gameObject); // optional, keep across scenes
 
         // --- Initialize Pool ---
+      //  InitializePool();
+    }
+    public void InitializePool()
+    {
+        coinPool.Clear();
+
         for (int i = 0; i < poolSize; i++)
         {
             GameObject coin = Instantiate(coinPrefab);
@@ -31,7 +37,6 @@ public class CoinsObjectPool : MonoBehaviour
             coinPool.Enqueue(coin);
         }
     }
-
     public void SpawnStraightCoinsOnPath(Transform path)
     {
         if (patterns.Length == 0) return;
@@ -41,9 +46,10 @@ public class CoinsObjectPool : MonoBehaviour
 
         foreach (Vector3 localPos in pattern.positions)
         {
-           
 
+            
             GameObject coin = GetCoinFromPool();
+           
             coin.transform.SetParent(path);
             coin.transform.localPosition = localPos;
             coin.transform.localRotation = Quaternion.identity;
@@ -59,6 +65,7 @@ public class CoinsObjectPool : MonoBehaviour
         foreach (Vector3 localPos in pattern.positions)
         {
             GameObject coin = GetCoinFromPool();
+            
             coin.transform.SetParent(path);
             coin.transform.localPosition = localPos;
             coin.transform.localRotation = Quaternion.identity;
@@ -84,4 +91,6 @@ public class CoinsObjectPool : MonoBehaviour
         coinPool.Enqueue(coin);
         coin.transform.parent = null;
     }
+
+    
 }

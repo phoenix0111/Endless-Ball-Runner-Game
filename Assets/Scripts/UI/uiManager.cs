@@ -93,7 +93,7 @@ public class uiManager : MonoBehaviour
         {
             Respawnmenu.SetActive(true);
 
-            RespawnPanelCoinText.text = "Coins Need To Respawn: " + coinsneededtoRespawn;
+            RespawnPanelCoinText.text = "Need " + coinsneededtoRespawn+ " Coins";
         }
         else
         {
