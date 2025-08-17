@@ -1,18 +1,20 @@
+
 using UnityEngine;
 
-public class CoinCleaning
-    : MonoBehaviour
+public class CoinCleaning : MonoBehaviour
 {
-    [SerializeField] private Transform player;   // assign Player in Inspector
-    [SerializeField] private Vector3 offset = new Vector3(0, 0, -10f); // stays 10 units behind
+    public Transform player;      // drag your Player here
+    public Vector3 offset = new Vector3(0, 0, -10); // set offset in Inspector
+    public float followSpeed = 5f; // smoothness of follow
 
-    private void LateUpdate()
+    void Update()
     {
-        if (player != null)
-        {
-            // Follow player with offset
-            transform.Translate( player.position + offset);
-        }
+        // target position (player + offset)
+        Vector3 targetPosition = player.position + offset;
+
+        // move follower towards target using Translate
+        Vector3 direction = targetPosition - transform.position;
+        transform.Translate(direction * followSpeed * Time.deltaTime, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,4 +26,5 @@ public class CoinCleaning
             Debug.Log("fere");
         }
     }
+
 }

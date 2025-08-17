@@ -2,18 +2,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Net.Mail;
 
 public class RegionLoader : MonoBehaviour
 {
     [Header("Essentials")]
     public int TotalCoins;
     [SerializeField] TextMeshProUGUI coinsText;
+    private int levelcheck = 1;
 
 
     [Header(" Panels")]
+    [SerializeField] GameObject MainPanel;
+    [SerializeField] GameObject ShopPanel;
+    [SerializeField] GameObject RegionFullPanel;
     [SerializeField] GameObject Region1Panel;
     [SerializeField] GameObject Region2Panel;
     [SerializeField] GameObject OutfitShopPanel;
+
 
     [Header("Region2 Lock")]
     [SerializeField] GameObject Region2Lock;
@@ -35,9 +41,13 @@ public class RegionLoader : MonoBehaviour
     
     void Start()
     {
-        Region1Panel.SetActive(true);
-        Region2Panel.SetActive(false);
-        OutfitShopPanel.gameObject.SetActive(false);
+        MainPanel.SetActive(true);
+        ShopPanel.SetActive(false);
+        RegionFullPanel.SetActive(false);
+        OutfitShopPanel.SetActive(false);
+      
+
+        
 
         CoinSystem();
 
@@ -77,7 +87,48 @@ public class RegionLoader : MonoBehaviour
 
 
     }
+    public void PlayGame()
+    {
+        Time.timeScale = 1; // Ensure the game is running at normal speed
 
+        if(levelcheck ==1)
+        SceneManager.LoadScene("GameScene1"); // Load the game scene
+
+        else
+        {
+            SceneManager.LoadScene("GameScene2");
+        }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void ShopPanelOpen()
+    {
+        MainPanel.SetActive(false);
+        ShopPanel.SetActive(true);
+        
+    }
+
+    public void OutFitButton()
+    {
+        ShopPanel.SetActive(false); 
+        OutfitShopPanel.SetActive(true);    
+    }
+
+    public void RegionButton()
+    {
+        RegionFullPanel.SetActive(true);
+        ShopPanel.SetActive(false);
+    }
+
+    public void ShopBackToMain()
+    {
+        ShopPanel.SetActive(false);
+        MainPanel.SetActive(true);  
+    }
     void CoinSystem()
     {
         TotalCoins = PlayerPrefs.GetInt("MenuCoins");
@@ -85,7 +136,7 @@ public class RegionLoader : MonoBehaviour
         TotalCoins = TotalCoins + Coin;
         Region2Select.interactable = false;
 
-        coinsText.text = " Coins" + TotalCoins.ToString();
+        coinsText.text = TotalCoins.ToString();
 
         PlayerPrefs.SetInt("MenuCoins", TotalCoins);
         PlayerPrefs.Save();
@@ -106,12 +157,22 @@ public class RegionLoader : MonoBehaviour
 
     public void SelectRegion1()
     {
-        SceneManager.LoadScene("GameScene1");
+        levelcheck = 1;
+        
+        RegionFullPanel.SetActive(false) ;
+        ShopPanel.SetActive(true);
+
+
+
     }
 
     public void SelectRegion2()
     {
-        SceneManager.LoadScene("GameScene2");
+
+        levelcheck = 2;
+        
+        RegionFullPanel.SetActive(false);
+        ShopPanel.SetActive(true);
     }
 
     public void OutfitShopLoad()
@@ -122,7 +183,7 @@ public class RegionLoader : MonoBehaviour
     public void OutfitShopClose()
     {
         OutfitShopPanel.gameObject.SetActive(false);
-        Region1Panel.gameObject.SetActive(true);
+        ShopPanel.gameObject.SetActive(true);
     }
 
     public void CharSelect1()

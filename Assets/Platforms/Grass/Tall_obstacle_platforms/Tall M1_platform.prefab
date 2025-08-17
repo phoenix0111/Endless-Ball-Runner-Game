@@ -31,37 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 388363235797477398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &182761728829813541
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9015162570882073333}
-  m_Layer: 11
-  m_Name: coinspawnpointers (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9015162570882073333
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182761728829813541}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: -10.44}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 388363235797477398}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457610687003508769
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,8 +161,6 @@ Transform:
   m_Children:
   - {fileID: 11167004396632826}
   - {fileID: 7322216153919379823}
-  - {fileID: 9015162570882073333}
-  - {fileID: 6403573186919181158}
   - {fileID: 591352174972874320}
   m_Father: {fileID: 8728439145124175546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -211,43 +178,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnStraightPoints:
   - {fileID: 11167004396632826}
-  - {fileID: 9015162570882073333}
   - {fileID: 7322216153919379823}
-  - {fileID: 6403573186919181158}
   CurveSpawnPoint:
   - {fileID: 7197578752341235391}
   - {fileID: 8822608789942932780}
---- !u!1 &5617661372889941249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6403573186919181158}
-  m_Layer: 11
-  m_Name: coinspawnpointers (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6403573186919181158
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5617661372889941249}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: 6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 388363235797477398}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5915723393321533080
 GameObject:
   m_ObjectHideFlags: 0

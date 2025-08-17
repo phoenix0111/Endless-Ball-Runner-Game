@@ -38,14 +38,9 @@ public class CoinSpawner : MonoBehaviour
         Transform firstPoint = SpawnStraightPoints[Random.Range(0, SpawnStraightPoints.Length)];
         CoinsObjectPool.Instance.SpawnStraightCoinsOnPath(firstPoint);
 
-        // pick second random point different from first
-        Transform secondPoint;
-        do
-        {
-            secondPoint = SpawnStraightPoints[Random.Range(0, SpawnStraightPoints.Length)];
-        } while (secondPoint == firstPoint);
+        
 
-        CoinsObjectPool.Instance.SpawnStraightCoinsOnPath(secondPoint);
+        
     }
 
     void SpawnCurvedCoins()

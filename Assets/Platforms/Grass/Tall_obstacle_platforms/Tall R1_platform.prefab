@@ -63,8 +63,6 @@ Transform:
   m_Children:
   - {fileID: 7190205133702784718}
   - {fileID: 7370099416602602830}
-  - {fileID: 7247449587704242113}
-  - {fileID: 7718099506958299054}
   - {fileID: 4546123931821910898}
   m_Father: {fileID: 1309052514862063593}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,9 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnStraightPoints:
   - {fileID: 7190205133702784718}
-  - {fileID: 7247449587704242113}
   - {fileID: 7370099416602602830}
-  - {fileID: 7718099506958299054}
   CurveSpawnPoint:
   - {fileID: 8456908468134257299}
   - {fileID: 8912567592229134045}
@@ -217,68 +213,6 @@ Transform:
   - {fileID: 6020613434767038858}
   - {fileID: 5165927063937105286}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6783378252529682018
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7718099506958299054}
-  m_Layer: 11
-  m_Name: coinspawnpointers (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7718099506958299054
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6783378252529682018}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: 6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6020613434767038858}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7524842609816741359
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7247449587704242113}
-  m_Layer: 11
-  m_Name: coinspawnpointers (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7247449587704242113
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7524842609816741359}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: -10.44}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6020613434767038858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7845607106434655873
 GameObject:

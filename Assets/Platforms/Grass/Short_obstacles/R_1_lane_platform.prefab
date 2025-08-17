@@ -93,37 +93,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8290812547060867808}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3705469199773863907
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3202054825790270368}
-  m_Layer: 11
-  m_Name: coinspawnpointers (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3202054825790270368
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3705469199773863907}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: -10.44}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1562662653912067493}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4252585086515573486
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,37 +125,6 @@ Transform:
   - {fileID: 5896997260319031867}
   - {fileID: 1081533474852961910}
   - {fileID: 4156078890980846774}
-  m_Father: {fileID: 1562662653912067493}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5401479254340023657
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3132043905073315699}
-  m_Layer: 11
-  m_Name: coinspawnpointers (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3132043905073315699
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5401479254340023657}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: 6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
   m_Father: {fileID: 1562662653912067493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6272697048967957537
@@ -317,8 +255,6 @@ Transform:
   m_Children:
   - {fileID: 9208371190056463326}
   - {fileID: 8097977372019298570}
-  - {fileID: 3202054825790270368}
-  - {fileID: 3132043905073315699}
   - {fileID: 8290812547060867808}
   m_Father: {fileID: 1381153404980109920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -336,9 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnStraightPoints:
   - {fileID: 9208371190056463326}
-  - {fileID: 3202054825790270368}
   - {fileID: 8097977372019298570}
-  - {fileID: 3132043905073315699}
   CurveSpawnPoint:
   - {fileID: 5896997260319031867}
   - {fileID: 1081533474852961910}
