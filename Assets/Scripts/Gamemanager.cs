@@ -48,9 +48,13 @@ public class Gamemanager : MonoBehaviour
     {
         PlayerPrefs.SetInt("GameCoins", 0);
         PlayerPrefs.Save();
+
+       
+        
+
     }
 
-   
+
     void Update()
     {
         ScoreCalculate();
@@ -125,7 +129,7 @@ public class Gamemanager : MonoBehaviour
 
         CoinCount = CoinCount - uiManager.coinsneededtoRespawn;
         uiManager.coinsneededtoRespawn += 10;
-        uiManager.CoinText.text = "Coins: " + CoinCount.ToString();
+        uiManager.CoinText.text =  CoinCount.ToString();
 
         PlayerPrefs.SetInt("GameCoins", CoinCount);
         PlayerPrefs.Save();

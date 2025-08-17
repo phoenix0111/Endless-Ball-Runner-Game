@@ -14,6 +14,7 @@ public class MovementPlayer : MonoBehaviour
     public GameObject Player1Skin;
     public GameObject Player2Skin;
     [SerializeField] CinemachineBasicMultiChannelPerlin Cinecam;
+    [SerializeField] Animator animator;
 
 
     [Header("Movement Settings")]
@@ -95,6 +96,8 @@ public class MovementPlayer : MonoBehaviour
 
         rb.linearVelocity = velocity;
 
+        animator.SetBool("run", true);
+        animator.speed = 3;
 
 
     }
@@ -168,6 +171,9 @@ public class MovementPlayer : MonoBehaviour
                 return;
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true; // Set jumping state to true
+            animator.speed = 1;
+            animator.SetBool("jump", true);
+            Invoke("landinganim", 1.3f);
         }
 
         if (Input.GetMouseButton(0) && isMobile && !isJumping)
@@ -176,8 +182,9 @@ public class MovementPlayer : MonoBehaviour
                 return;
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.speed = 1;
             isJumping = true; // Set jumping state to true
-
+            animator.SetBool("jump", true);
         }
     }
 
@@ -185,8 +192,8 @@ public class MovementPlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-            isJumping = false;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) 
+        isJumping = false;
 
 
         if (collision.gameObject.tag == "Obstacle" && !WillDestroyObject)
@@ -269,5 +276,10 @@ public class MovementPlayer : MonoBehaviour
         forwardSpeed = currentspeed;
         
         WillDestroyObject = false;
+    }
+
+    void landinganim()
+    {
+        animator.SetBool("jump", false);
     }
 }

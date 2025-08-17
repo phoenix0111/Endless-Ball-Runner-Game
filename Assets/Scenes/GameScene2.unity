@@ -2646,10 +2646,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 840592608}
     - target: {fileID: 260861095288644591, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
-      propertyPath: coinSpawner
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 260861095288644591, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
       propertyPath: gamemanager
       value: 
       objectReference: {fileID: 1868692185}
@@ -4109,6 +4105,7 @@ MonoBehaviour:
   Player: {fileID: 643675637}
   cinecamera: {fileID: 490189669}
   player: {fileID: 643675636}
+  SpeedLines: {fileID: 0}
   score: 0
   scoreMultiplier: 10
   CoinCount: 0
