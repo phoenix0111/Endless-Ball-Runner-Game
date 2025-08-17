@@ -50,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 70c586116de8c0e46ab0ad7f0dc1d855, type: 3}
       propertyPath: m_Name
-      value: Cactus_2_main
+      value: Desert_tall_obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 70c586116de8c0e46ab0ad7f0dc1d855, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 8416474143160137575, guid: 70c586116de8c0e46ab0ad7f0dc1d855, type: 3}
       propertyPath: m_LocalScale.x
