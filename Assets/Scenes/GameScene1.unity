@@ -2823,6 +2823,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 490189671}
     - target: {fileID: 260861095288644591, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
+      propertyPath: jumpForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 260861095288644591, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 840592608}
