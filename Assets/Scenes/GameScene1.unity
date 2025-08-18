@@ -2007,6 +2007,8 @@ MonoBehaviour:
   - {fileID: 4739823312261511951, guid: 12ccc59544118994baee3720d470427a, type: 3}
   - {fileID: 6619259380468815599, guid: 4a8911bf011c22b4ebc254390a5db9b1, type: 3}
   - {fileID: 5592853727748080212, guid: 35ef57e85543d2646ac6f99f3d39ed1a, type: 3}
+  - {fileID: 5592853727748080212, guid: d547a41808b0f024b851bba99847b4c5, type: 3}
+  - {fileID: 5592853727748080212, guid: 16186b5f6c4095742a764d25486181e8, type: 3}
   initialSpawnCount: 10
   pathLength: 30
   blueTileIndex: 7
