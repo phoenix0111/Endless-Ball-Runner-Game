@@ -2827,10 +2827,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 840592608}
     - target: {fileID: 260861095288644591, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
-      propertyPath: Player2Skin
-      value: 
-      objectReference: {fileID: 1630217652}
-    - target: {fileID: 260861095288644591, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
       propertyPath: gamemanager
       value: 
       objectReference: {fileID: 1868692185}
@@ -2879,8 +2875,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1847148561642804391, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
@@ -4024,11 +4019,6 @@ RectTransform:
   m_AnchoredPosition: {x: 124, y: -273}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
---- !u!1 &1630217652 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2603027349670964220, guid: 6fdd8d6b83802b3468c619a6d3328433, type: 3}
-  m_PrefabInstance: {fileID: 1264092687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1647045180
 GameObject:
   m_ObjectHideFlags: 0
