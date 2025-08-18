@@ -11,13 +11,22 @@ public class CoinSpawner : MonoBehaviour
 
     void Start()
     {
-        
+
         for (int i = 0; i < SpawnStraightPoints.Length; i++)
         {
-            SpawnStraightPoints[i].transform.position = new Vector3(Random.Range(-2,2), SpawnStraightPoints[i].transform.position.y, SpawnStraightPoints[i].transform.position.z);
+            float[] possibleX = { -2.5f, 0, 2.5f }; // Allowed positions
+            int randomIndex = Random.Range(0, possibleX.Length); // Pick 0, 1, or 2
+            float chosenX = possibleX[randomIndex];
+
+            SpawnStraightPoints[i].transform.position = new Vector3(
+                chosenX,
+                SpawnStraightPoints[i].transform.position.y,
+                SpawnStraightPoints[i].transform.position.z
+            );
         }
 
-        
+
+
 
 
         SpawnStraightCoins();
