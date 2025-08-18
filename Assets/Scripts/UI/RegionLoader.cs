@@ -127,6 +127,7 @@ public class RegionLoader : MonoBehaviour
     public void ShopBackToMain()
     {
         ShopPanel.SetActive(false);
+      
         MainPanel.SetActive(true);  
     }
     void CoinSystem()
@@ -209,7 +210,7 @@ public class RegionLoader : MonoBehaviour
     {
         if (TotalCoins >= CoinsToBuyRegion2)
         {
-            Destroy(Region2Lock);
+           // Destroy(Region2Lock);
             Region2Select.interactable = true;
             TotalCoins = TotalCoins - CoinsToBuyRegion2;
             coinsText.text = " Coins" + TotalCoins.ToString();

@@ -82,7 +82,7 @@ public class Gamemanager : MonoBehaviour
       
         currentsidespeed = Player.sidewaysSpeed;
 
-        Debug.Log("resapewn"+ RespawnPos);
+        
     }
 
     void ScoreCalculate()

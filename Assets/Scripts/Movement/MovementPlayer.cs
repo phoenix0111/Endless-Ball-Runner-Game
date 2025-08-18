@@ -14,6 +14,7 @@ public class MovementPlayer : MonoBehaviour
     public GameObject Player1Skin;
     public GameObject Player2Skin;
     [SerializeField] CinemachineBasicMultiChannelPerlin Cinecam;
+   
     [SerializeField] Animator animator;
 
 
@@ -41,9 +42,9 @@ public class MovementPlayer : MonoBehaviour
     {
         int playerIndexChoose = PlayerPrefs.GetInt("CharIndex", 1);
 
-        if (playerIndexChoose == 1) Player1Skin.SetActive(true); Player2Skin.SetActive(false);
+        if (playerIndexChoose == 1) Player1Skin.SetActive(true); Player2Skin.SetActive(false); 
 
-        if (playerIndexChoose == 2) Player1Skin.SetActive(false); Player2Skin.SetActive(true);
+        if (playerIndexChoose == 2) Player1Skin.SetActive(false); Player2Skin.SetActive(true); 
 
         rb = GetComponent<Rigidbody>();
 
@@ -97,7 +98,7 @@ public class MovementPlayer : MonoBehaviour
         rb.linearVelocity = velocity;
 
         animator.SetBool("run", true);
-        animator.speed = 3;
+        animator.speed = 5;
 
 
     }
@@ -173,6 +174,7 @@ public class MovementPlayer : MonoBehaviour
             isJumping = true; // Set jumping state to true
             animator.speed = 1;
             animator.SetBool("jump", true);
+           
             Invoke("landinganim", 1.3f);
         }
 
@@ -185,6 +187,8 @@ public class MovementPlayer : MonoBehaviour
             animator.speed = 1;
             isJumping = true; // Set jumping state to true
             animator.SetBool("jump", true);
+           
+            Invoke("landinganim", 1.3f);
         }
     }
 
